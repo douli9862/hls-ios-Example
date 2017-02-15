@@ -200,7 +200,7 @@ static OSStatus handleInputBuffer(void *inRefCon,
         return;
     }
     
-    CMSampleBufferRef sampleBuf = [self adjustTime:sampleBuffer withUs:GetNowMs()];
+    CMSampleBufferRef sampleBuf = [self adjustTime:sampleBuffer withUs:GetNowUs()];
     
     CMTime pts = CMSampleBufferGetPresentationTimeStamp(sampleBuf);
     //NSLog(@"auido pts:%lld\n", pts.value);
@@ -247,10 +247,6 @@ static OSStatus handleInputBuffer(void *inRefCon,
     _aacEncoder = [[KFAACEncoder alloc] initWithBitrate:audioBitrate sampleRate:self.audioSampleRate channels:1];
     _aacEncoder.delegate = self;
     _aacEncoder.addADTSHeader = YES;
-    
-    
-    const auto epoch = std::chrono::steady_clock::now();
-
 }
 
 - (void) setupAudioCapture {
@@ -281,7 +277,6 @@ static OSStatus handleInputBuffer(void *inRefCon,
 
 //add by tzx
 
-
 - (AVFrameRateRange*)frameRateRangeForFrameRate:(double)frameRate andINPUT:(AVCaptureDeviceInput*) videoInput{
     for (AVFrameRateRange* range in
          videoInput.device.activeFormat.videoSupportedFrameRateRanges)
@@ -294,27 +289,6 @@ static OSStatus handleInputBuffer(void *inRefCon,
     return nil;
 }
 
-
-//调整媒体数据的时间
-- (CMSampleBufferRef)adjustTime:(CMSampleBufferRef)sample by:(CMTime)offset
-{
-    CMItemCount count;
-    CMSampleBufferGetSampleTimingInfoArray(sample, 0, nil, &count);
-    CMSampleTimingInfo* pInfo = (CMSampleTimingInfo*)malloc(sizeof(CMSampleTimingInfo) * count);
-    CMSampleBufferGetSampleTimingInfoArray(sample, count, pInfo, &count);
-    
-    for (CMItemCount i = 0; i < count; i++) {
-        pInfo[i].decodeTimeStamp = CMTimeSubtract(pInfo[i].decodeTimeStamp, offset);
-        pInfo[i].presentationTimeStamp = CMTimeSubtract(pInfo[i].presentationTimeStamp, offset);
-    }
-    
-    CMSampleBufferRef sout;
-    CMSampleBufferCreateCopyWithNewTiming(nil, sample, count, pInfo, &sout);
-    free(pInfo);
-    return sout;
-}
-
-
 //调整媒体数据的时间
 - (CMSampleBufferRef)adjustTime:(CMSampleBufferRef)sample withUs:(int64_t)timeUs
 {
@@ -324,8 +298,8 @@ static OSStatus handleInputBuffer(void *inRefCon,
     CMSampleBufferGetSampleTimingInfoArray(sample, count, pInfo, &count);
     
     for (CMItemCount i = 0; i < count; i++) {
-        pInfo[i].decodeTimeStamp =  CMTimeMake(timeUs, 1000000);///CMTimeSubtract(pInfo[i].decodeTimeStamp, offset);
-        pInfo[i].presentationTimeStamp = CMTimeMake(timeUs, 1000000);//CMTimeSubtract(pInfo[i].presentationTimeStamp, offset);
+        pInfo[i].decodeTimeStamp =  CMTimeMake(timeUs, 1000000000);///CMTimeSubtract(pInfo[i].decodeTimeStamp, offset);
+        pInfo[i].presentationTimeStamp = CMTimeMake(timeUs, 1000000000);//CMTimeSubtract(pInfo[i].presentationTimeStamp, offset);
     }
     
     CMSampleBufferRef sout;
@@ -400,8 +374,7 @@ static OSStatus handleInputBuffer(void *inRefCon,
     if ([_session canAddOutput:_videoOutput]) {
         [_session addOutput:_videoOutput];
         
-//        //add by tzx
-        [self setActiveFrameRateImpl:VIDEO_CAPTURE_IOS_DEFAULT_INITIAL_FRAMERATE andLocnfig:(BOOL)FALSE andINPUT:videoInput];
+        [self setActiveFrameRateImpl:VIDEO_CAPTURE_IOS_DEFAULT_INITIAL_FRAMERATE andLocnfig:(BOOL)FALSE andINPUT:videoInput];//add by tzx
     }
     _videoConnection = [_videoOutput connectionWithMediaType:AVMediaTypeVideo];
 }
@@ -424,7 +397,7 @@ static OSStatus handleInputBuffer(void *inRefCon,
     }
     
     
-    int64_t timeVale = GetNowMs();
+    int64_t timeVale = GetNowUs();
     CMSampleBufferRef sampleBuf = [self adjustTime:sampleBuffer withUs:timeVale];
     
     CMTime pts = CMSampleBufferGetPresentationTimeStamp(sampleBuf);

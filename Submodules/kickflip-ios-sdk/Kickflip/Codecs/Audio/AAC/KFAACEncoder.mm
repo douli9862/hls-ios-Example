@@ -18,20 +18,20 @@
 #include <thread>
 #include <mutex>
 
-#include <sys/time.h>
-
-static int64_t systemTimeNs() {
-    struct timeval t;
-    t.tv_sec = t.tv_usec = 0;
-    
-    gettimeofday(&t, NULL);
-    return t.tv_sec * 1000000000LL + t.tv_usec * 1000LL;
-}
-
-static int64_t GetNowMs()
-{
-    return systemTimeNs() / 1000000ll;
-}
+//#include <sys/time.h>
+//
+//static int64_t systemTimeNs() {
+//    struct timeval t;
+//    t.tv_sec = t.tv_usec = 0;
+//    
+//    gettimeofday(&t, NULL);
+//    return t.tv_sec * 1000000000LL + t.tv_usec * 1000LL;
+//}
+//
+//static int64_t GetNowMs()
+//{
+//    return systemTimeNs() / 1000000ll;
+//}
 
 
 @interface KFAACEncoder()

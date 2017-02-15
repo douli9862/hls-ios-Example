@@ -115,7 +115,7 @@
         
         //int64_t originalPTS = pts.value - beginTimeVale;
         
-        originalPTS *= 1000000;
+        originalPTS *= 1000;
         
         _packet->data = (uint8_t*)data.bytes;
         _packet->size = (int)data.length;

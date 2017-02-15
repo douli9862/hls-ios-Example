@@ -18,22 +18,22 @@
 #include <thread>
 #include <mutex>
 
-static int64_t systemTimeNs() {
-    struct timeval t;
-    t.tv_sec = t.tv_usec = 0;
-    
-    gettimeofday(&t, NULL);
-    return t.tv_sec * 1000000000LL + t.tv_usec * 1000LL;
-}
-
-static int64_t GetNowMs()
-{
-    return systemTimeNs() / 1000000ll;
-}
-
-static int64_t GetNowUs() {
-    return systemTimeNs() / 1000ll;
-}
+//static int64_t systemTimeNs() {
+//    struct timeval t;
+//    t.tv_sec = t.tv_usec = 0;
+//    
+//    gettimeofday(&t, NULL);
+//    return t.tv_sec * 1000000000LL + t.tv_usec * 1000LL;
+//}
+//
+//static int64_t GetNowMs()
+//{
+//    return systemTimeNs() / 1000000ll;
+//}
+//
+//static int64_t GetNowUs() {
+//    return systemTimeNs() / 1000ll;
+//}
 
 @interface KFH264Encoder()
 @property (nonatomic, strong) AVEncoder* encoder;
