@@ -22,6 +22,11 @@
             NSLog(@"codec not found: %@", outputCodec);
         }
         self.stream = avformat_new_stream(outputFile.formatContext, codec);
+//        self.stream->time_base.num = 1; //add by tzx
+//        self.stream->time_base.den = 1000;
+//        
+//        outputFile.formatContext->streams[0]->time_base = AVRational(1, 1000);
+        
         [outputFile addOutputStream:self];
     }
     return self;

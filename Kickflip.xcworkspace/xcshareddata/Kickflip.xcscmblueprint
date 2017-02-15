@@ -1,15 +1,15 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D0BD4C1CFF3E9C17A2326588C2A94030033271A4",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "CCE6A684A08E0F1AADAB2040E2C758604958E0C5",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "D0BD4C1CFF3E9C17A2326588C2A94030033271A4" : 0,
+    "CCE6A684A08E0F1AADAB2040E2C758604958E0C5" : 9223372036854775807,
     "8359C4C1F827A159C9EDE1E14CD27BC93B5B0027" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "EAFB882F-7FE2-4C38-A474-3711021E2FFE",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "D0BD4C1CFF3E9C17A2326588C2A94030033271A4" : "hls-ios-example\/",
+    "CCE6A684A08E0F1AADAB2040E2C758604958E0C5" : "hls-ios-Example\/",
     "8359C4C1F827A159C9EDE1E14CD27BC93B5B0027" : "hls-ios-example\/Submodules\/kickflip-ios-sdk\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Kickflip",
@@ -24,7 +24,7 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:PerchLive\/kickflip-ios-example.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D0BD4C1CFF3E9C17A2326588C2A94030033271A4"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CCE6A684A08E0F1AADAB2040E2C758604958E0C5"
     }
   ]
 }

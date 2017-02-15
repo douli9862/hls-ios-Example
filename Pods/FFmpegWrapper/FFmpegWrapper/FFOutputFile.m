@@ -148,7 +148,7 @@ NSString const *kFFmpegOutputFormatKey = @"kFFmpegOutputFormatKey";
         //NSLog(@"bsf: %@", bsfData);
     }
     
-    NSLog(@"\nffOutputStream.lastMuxDTS :%lld,packet->dts:%lld\n", ffOutputStream.lastMuxDTS, packet->dts);
+    //NSLog(@"\nffOutputStream.lastMuxDTS :%lld,packet->dts:%lld\n", ffOutputStream.lastMuxDTS, packet->dts);
     ffOutputStream.lastMuxDTS = packet->dts;
     
     int writeFrameValue = av_interleaved_write_frame(self.formatContext, packet);

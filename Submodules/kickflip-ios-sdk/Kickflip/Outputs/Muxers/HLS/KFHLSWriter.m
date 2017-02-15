@@ -26,12 +26,18 @@
 @end
 
 @implementation KFHLSWriter
+{
+    bool    bKeyComed;
+    int64_t beginTimeVale;
+}
 
 - (id) initWithDirectoryPath:(NSString *)directoryPath {
     if (self = [super init]) {
         av_register_all();
         avformat_network_init();
         avcodec_register_all();
+        
+        bKeyComed = false;
         
 #if DEBUG
         av_log_set_level(AV_LOG_VERBOSE);
@@ -44,10 +50,10 @@
         _directoryPath = directoryPath;
         _packet = av_malloc(sizeof(AVPacket));
         _videoTimeBase.num = 1;
-        _videoTimeBase.den = 1000000;// 1000000000;
+        _videoTimeBase.den = 1000000000;//1000000;//
         _audioTimeBase.num = 1;
-        _audioTimeBase.den = 1000000;//1000000000;
-        _segmentDurationSeconds = 10;
+        _audioTimeBase.den = 1000000000;//1000000;//
+        _segmentDurationSeconds = 2;
         [self setupOutputFile];
         _conversionQueue = dispatch_queue_create("HLS Write queue", DISPATCH_QUEUE_SERIAL);
         _uuid = [[NSUUID UUID] UUIDString];
@@ -99,14 +105,35 @@
         // This lets the muxer know about H264 keyframes
         if (streamIndex == 0 && isKeyFrame) { // this is hardcoded to video right now
             _packet->flags |= AV_PKT_FLAG_KEY;
+            //bKeyComed = true;
+            //beginTimeVale = pts.value;
         }
+        
+//        if(!bKeyComed){
+//            return ;
+//        }
+        
+        //int64_t originalPTS = pts.value - beginTimeVale;
+        
+        originalPTS *= 1000000;
         
         _packet->data = (uint8_t*)data.bytes;
         _packet->size = (int)data.length;
         _packet->stream_index = streamIndex;
+        AVRational temp ;
+        if(streamIndex == 0){
+            temp = _outputFile.formatContext->streams[_packet->stream_index]->time_base;
+        }
+        else{
+            temp = _outputFile.formatContext->streams[_packet->stream_index]->time_base;
+        }
         NSLog(@"\nstreamIndex:%d\n", streamIndex);
         uint64_t scaledPTS = av_rescale_q(originalPTS, _videoTimeBase, _outputFile.formatContext->streams[_packet->stream_index]->time_base);
         //DDLogInfo(@"*** Scaled PTS: %lld", scaledPTS);
+        
+        if(streamIndex == 0){
+            NSLog(@"\n scaledPTS :%lld, orgPts:%lld\n", scaledPTS, originalPTS/1000000 + beginTimeVale);
+        }
         
         _packet->pts = scaledPTS;
         _packet->dts = scaledPTS;

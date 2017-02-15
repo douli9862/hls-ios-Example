@@ -248,6 +248,11 @@
 		6A029D6DE45667231FCD6BB7829D2156 /* YapDatabaseRTreeIndexOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1619EE3F8E6C74570B0F898C48172B5B /* YapDatabaseRTreeIndexOptions.m */; };
 		6A520D87DD2E4AE57F3D357BCA9D33AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA8370DA69027B6A66C2B1CA53A75F1 /* Foundation.framework */; };
 		6C28ADC799BCCB5ACB95F8F46B1EF53D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA8370DA69027B6A66C2B1CA53A75F1 /* Foundation.framework */; };
+		6C469BF51E5323BA0091C393 /* AudioFrameBufferPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C469BF21E5323BA0091C393 /* AudioFrameBufferPool.cpp */; };
+		6C469BF61E5323BA0091C393 /* AudioFrameBufferPool.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C469BF31E5323BA0091C393 /* AudioFrameBufferPool.h */; };
+		6C469BF71E5323BA0091C393 /* MediaDataType.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C469BF41E5323BA0091C393 /* MediaDataType.h */; };
+		6C469BFA1E5323F80091C393 /* mediaProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C469BF81E5323F80091C393 /* mediaProcess.cpp */; };
+		6C469BFB1E5323F80091C393 /* mediaProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C469BF91E5323F80091C393 /* mediaProcess.h */; };
 		6DDDBAE5B847EDF3F6D25AFB8F9648EF /* YDBCKAttachRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 13EBA2D385C1D54DB0962A3FC81846BA /* YDBCKAttachRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		701DB6F144AC4E1402FD1162DFDE2016 /* UIAlertView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = E87BE184E9917055C0BBEF835C171BE3 /* UIAlertView+AFNetworking.m */; };
 		707469E6903B6E2AECA926FB87B823A8 /* KFHLSManifestGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8965D9B4D01BE619B43E8BCEDEE3637B /* KFHLSManifestGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -406,7 +411,7 @@
 		B0E52E5D4DFBA586D1ED0C50C2C49531 /* NSObject+MTLComparisonAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53685831E047AF0E7052DE8F5768AE14 /* NSObject+MTLComparisonAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0FFB3B494A9C2FFD6DF0501C2658A44 /* NSDictionary+YapDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C3E72709F911C3C8FE7C6E905B2322A /* NSDictionary+YapDatabase.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B1F746ADDBC5CFAAF7EF9394BE77D04F /* UIImage+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FA67E72D1C6A9DF2C0D6852EF9A63D4 /* UIImage+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B22401C3D5D1BCED25D9418E64199EF9 /* KFRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 750C040164A04DDA61980CD9C0E4463C /* KFRecorder.m */; };
+		B22401C3D5D1BCED25D9418E64199EF9 /* KFRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 750C040164A04DDA61980CD9C0E4463C /* KFRecorder.mm */; };
 		B242CCB61A776C5F81756B9CF27889CA /* YapDatabaseFullTextSearchHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F3476CAB8986ACA419AA904598C18DD /* YapDatabaseFullTextSearchHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B24A4C53A4481E5142915C0AF99EF2D8 /* DDMultiFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AE3E705BE5CD06636DD123027B35A5A /* DDMultiFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2B28020C9427E9BD885F50A21D3B202 /* AWSGZIP.h in Headers */ = {isa = PBXBuildFile; fileRef = C2A21D14ACC2E4488BCA0212C6FBD493 /* AWSGZIP.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -446,7 +451,7 @@
 		BD2BA6EFB22066E8009F4AB17A2E5ED2 /* YapDatabaseViewPage.mm in Sources */ = {isa = PBXBuildFile; fileRef = E0B6941164A63AD8B4428B28C87AC1FF /* YapDatabaseViewPage.mm */; };
 		BE32B00C0D6AD4CCFB99C79C7902C747 /* Kickflip-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 313C0293E77AB78AFC3B3C9868E56AD7 /* Kickflip-dummy.m */; };
 		BE426AD4633A9DE83D309D30DEF45EE5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA8370DA69027B6A66C2B1CA53A75F1 /* Foundation.framework */; };
-		BE6B7C48317B8AEA959E692692A2E79E /* KFAACEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1A4251CD9733AE3C0EEF56953BEAC6 /* KFAACEncoder.m */; };
+		BE6B7C48317B8AEA959E692692A2E79E /* KFAACEncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = DC1A4251CD9733AE3C0EEF56953BEAC6 /* KFAACEncoder.mm */; };
 		BE9094D1564341F587674768600E7048 /* YapDatabaseFilteredViewPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 258D504202812380BCC1786B31771848 /* YapDatabaseFilteredViewPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BEF4CF5A41D484531C0E80E97C439BF8 /* YapDatabaseHooks.m in Sources */ = {isa = PBXBuildFile; fileRef = EE250127C06D82F5A530A493BAAD09E2 /* YapDatabaseHooks.m */; };
 		BF2955C9E1798EDF57245AB628692FD1 /* YapDatabaseFilteredViewConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 924785AB2BA3CF653495837A64A9F96D /* YapDatabaseFilteredViewConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1204,6 +1209,11 @@
 		6AE3E705BE5CD06636DD123027B35A5A /* DDMultiFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDMultiFormatter.h; path = Lumberjack/Extensions/DDMultiFormatter.h; sourceTree = "<group>"; };
 		6BD1BA2CE6F1FBBD4DD385D714698401 /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
 		6C41C61AF7C482F0607EFD372DAD269D /* FormatterKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FormatterKit-dummy.m"; sourceTree = "<group>"; };
+		6C469BF21E5323BA0091C393 /* AudioFrameBufferPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioFrameBufferPool.cpp; sourceTree = "<group>"; };
+		6C469BF31E5323BA0091C393 /* AudioFrameBufferPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFrameBufferPool.h; sourceTree = "<group>"; };
+		6C469BF41E5323BA0091C393 /* MediaDataType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaDataType.h; sourceTree = "<group>"; };
+		6C469BF81E5323F80091C393 /* mediaProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mediaProcess.cpp; sourceTree = "<group>"; };
+		6C469BF91E5323F80091C393 /* mediaProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mediaProcess.h; sourceTree = "<group>"; };
 		6C7CFC20B954D69FD05B912650D58F81 /* YapDatabaseViewChangePrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YapDatabaseViewChangePrivate.h; path = YapDatabase/Extensions/Views/Internal/YapDatabaseViewChangePrivate.h; sourceTree = "<group>"; };
 		6C9955B381633504E4260EE37FF99C3A /* DDLog+LOGV.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDLog+LOGV.h"; path = "Lumberjack/DDLog+LOGV.h"; sourceTree = "<group>"; };
 		6CE4906F3D16686C7B387BAAF8AFBA65 /* YapDatabaseRelationshipNode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YapDatabaseRelationshipNode.h; path = YapDatabase/Extensions/Relationships/YapDatabaseRelationshipNode.h; sourceTree = "<group>"; };
@@ -1236,7 +1246,7 @@
 		74B3BBAA3080DA6CAA1BF4234385DFD4 /* YapDatabaseViewTypes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = YapDatabaseViewTypes.m; path = YapDatabase/Extensions/Views/YapDatabaseViewTypes.m; sourceTree = "<group>"; };
 		74F5E0BE6A6722BB377D70D9A8376CEB /* AWSCore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AWSCore.xcconfig; sourceTree = "<group>"; };
 		7503811B5FEA9D67B99587B37B2A0FB5 /* samplefmt.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = samplefmt.h; path = "ffmpeg-ios-static-libs/include/libavutil/samplefmt.h"; sourceTree = "<group>"; };
-		750C040164A04DDA61980CD9C0E4463C /* KFRecorder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = KFRecorder.m; sourceTree = "<group>"; };
+		750C040164A04DDA61980CD9C0E4463C /* KFRecorder.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; path = KFRecorder.mm; sourceTree = "<group>"; };
 		755197451E2B65B062673EC455F0AE6A /* dh.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dh.h; path = "ffmpeg-ios-static-libs/include/openssl/dh.h"; sourceTree = "<group>"; };
 		75A22922923D0DF652C610E5C0717EB1 /* SSPullToRefresh.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SSPullToRefresh.xcconfig; sourceTree = "<group>"; };
 		75C2BB45F4CE4D85ADA52D1DB9AD637C /* kssl.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = kssl.h; path = "ffmpeg-ios-static-libs/include/openssl/kssl.h"; sourceTree = "<group>"; };
@@ -1583,7 +1593,7 @@
 		DB00D2AF9684CB0C7C30E7DF8CED4143 /* SDWebImage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SDWebImage-prefix.pch"; sourceTree = "<group>"; };
 		DB3556040064E6DA184EF2F1DF13A94D /* YapDatabaseString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YapDatabaseString.h; path = YapDatabase/Internal/YapDatabaseString.h; sourceTree = "<group>"; };
 		DBB96C7777192FA2C786E9B61D2525C3 /* FFFile.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FFFile.m; path = FFmpegWrapper/FFFile.m; sourceTree = "<group>"; };
-		DC1A4251CD9733AE3C0EEF56953BEAC6 /* KFAACEncoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = KFAACEncoder.m; sourceTree = "<group>"; };
+		DC1A4251CD9733AE3C0EEF56953BEAC6 /* KFAACEncoder.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; path = KFAACEncoder.mm; sourceTree = "<group>"; };
 		DC2F682804BDF9740B6DDADA57CE3DA8 /* AFURLSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = AFNetworking/AFURLSessionManager.h; sourceTree = "<group>"; };
 		DC427C115A9C8A6302C5174FE4270CE9 /* pem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pem.h; path = "ffmpeg-ios-static-libs/include/openssl/pem.h"; sourceTree = "<group>"; };
 		DC5E846626A7A560505F418E8D9EB7BB /* YapDatabaseSearchResultsViewTransaction.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = YapDatabaseSearchResultsViewTransaction.m; path = YapDatabase/Extensions/SearchResults/YapDatabaseSearchResultsViewTransaction.m; sourceTree = "<group>"; };
@@ -1895,6 +1905,11 @@
 		0FAA0B4CD8A5B50C6FC349BA69BFC45A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				6C469BF81E5323F80091C393 /* mediaProcess.cpp */,
+				6C469BF91E5323F80091C393 /* mediaProcess.h */,
+				6C469BF21E5323BA0091C393 /* AudioFrameBufferPool.cpp */,
+				6C469BF31E5323BA0091C393 /* AudioFrameBufferPool.h */,
+				6C469BF41E5323BA0091C393 /* MediaDataType.h */,
 				869254E35F7BF7E913EDFB2FD859124F /* KFAWSCredentialsProvider.h */,
 				641CFDFE9C683B73CD218B946D972781 /* KFAWSCredentialsProvider.m */,
 				C38B9F211BB09530E4514CC48B87DFC2 /* KFDateUtils.h */,
@@ -1938,7 +1953,7 @@
 			isa = PBXGroup;
 			children = (
 				70F80CC23CAA00AC714EBA88407B0261 /* KFRecorder.h */,
-				750C040164A04DDA61980CD9C0E4463C /* KFRecorder.m */,
+				750C040164A04DDA61980CD9C0E4463C /* KFRecorder.mm */,
 			);
 			path = Inputs;
 			sourceTree = "<group>";
@@ -2817,7 +2832,7 @@
 			isa = PBXGroup;
 			children = (
 				D9F31C94841FE6D901F6BB19B70E95E7 /* KFAACEncoder.h */,
-				DC1A4251CD9733AE3C0EEF56953BEAC6 /* KFAACEncoder.m */,
+				DC1A4251CD9733AE3C0EEF56953BEAC6 /* KFAACEncoder.mm */,
 			);
 			path = AAC;
 			sourceTree = "<group>";
@@ -3526,9 +3541,11 @@
 			files = (
 				A6E75340C122150D50C3336033B2CC25 /* AFHTTPRequestOperation.h in Headers */,
 				A893A517553E71A44CA906B7807C4358 /* AFHTTPRequestOperationManager.h in Headers */,
+				6C469BF61E5323BA0091C393 /* AudioFrameBufferPool.h in Headers */,
 				3AB5D9C39898BE6F799456FAB7E5918D /* AFHTTPSessionManager.h in Headers */,
 				85F1F72928AD9456F7B09ADE2B068946 /* AFNetworkActivityIndicatorManager.h in Headers */,
 				EF429519462916C7AA098340A55D207A /* AFNetworking.h in Headers */,
+				6C469BFB1E5323F80091C393 /* mediaProcess.h in Headers */,
 				D8EE830D94B6F86F25EF490933642370 /* AFNetworkReachabilityManager.h in Headers */,
 				2A15612698778DBFB97B2187A639BB30 /* AFSecurityPolicy.h in Headers */,
 				2BC1B5F5D50F83191EA5BFCA1B6334CE /* AFURLConnectionOperation.h in Headers */,
@@ -3544,6 +3561,7 @@
 				F143C4672AED921D368B6CA693FD4B81 /* UIProgressView+AFNetworking.h in Headers */,
 				E7C773F369985517B0B7AA09F26F3549 /* UIRefreshControl+AFNetworking.h in Headers */,
 				121C6756A416DFB6CBE63B6CD70464BD /* UIWebView+AFNetworking.h in Headers */,
+				6C469BF71E5323BA0091C393 /* MediaDataType.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4183,6 +4201,7 @@
 				9E9FE8CF4FC567C2A12C287D79FACCA3 /* AFNetworkReachabilityManager.m in Sources */,
 				A7890C3960B2566BFA89985867D531A0 /* AFSecurityPolicy.m in Sources */,
 				2D9E7D0DEB85F1798E31DAA291B79ED9 /* AFURLConnectionOperation.m in Sources */,
+				6C469BFA1E5323F80091C393 /* mediaProcess.cpp in Sources */,
 				3340CC678D65EE67BEFC2F1DF02820FD /* AFURLRequestSerialization.m in Sources */,
 				B8272969D21641239B21403A451F0D66 /* AFURLResponseSerialization.m in Sources */,
 				541DA3518B9DEFF71969BF199FEFE1DC /* AFURLSessionManager.m in Sources */,
@@ -4193,6 +4212,7 @@
 				9F4B6632233C9035F6A1011EB1036B41 /* UIProgressView+AFNetworking.m in Sources */,
 				82DC73BB2E5B60EC8DE64E76065F2D7A /* UIRefreshControl+AFNetworking.m in Sources */,
 				6473866FE426D8746E525A7F5760F4E3 /* UIWebView+AFNetworking.m in Sources */,
+				6C469BF51E5323BA0091C393 /* AudioFrameBufferPool.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4265,7 +4285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE8405944B0BAD01B16324C1DD19A1D2 /* AVEncoder.mm in Sources */,
-				BE6B7C48317B8AEA959E692692A2E79E /* KFAACEncoder.m in Sources */,
+				BE6B7C48317B8AEA959E692692A2E79E /* KFAACEncoder.mm in Sources */,
 				417980BAE5F119A05B99A3EEAE6E9F0A /* KFAPIClient.m in Sources */,
 				7971F67D755D14FE4C064EB3E0C5F948 /* KFAudioEncoder.m in Sources */,
 				D1E386A6475D45F055A3AD5CB2DF8DA0 /* KFAWSCredentialsProvider.m in Sources */,
@@ -4282,7 +4302,7 @@
 				1F9473CC8C649BED7ECFCC45DA29FFFD /* KFLiveBannerView.m in Sources */,
 				89D33CF5719935F9DDE6640AA8F08A73 /* KFPaginationInfo.m in Sources */,
 				C00862346786AEF821D886C54829D460 /* KFRecordButton.m in Sources */,
-				B22401C3D5D1BCED25D9418E64199EF9 /* KFRecorder.m in Sources */,
+				B22401C3D5D1BCED25D9418E64199EF9 /* KFRecorder.mm in Sources */,
 				D1E837389B4BDC33268BBCC2C47B5B6C /* KFRTMPStream.m in Sources */,
 				A6A1FD936E582DAC07D38A9F19F74573 /* KFS3Stream.m in Sources */,
 				9EF0C2FF9C13CF6E7CD1FB9247B55818 /* KFStream.m in Sources */,

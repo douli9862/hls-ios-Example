@@ -12,7 +12,11 @@
 #import "KFLog.h"
 #import "KFVideoFrame.h"
 
+#include <chrono>
+#include <iostream>
 #include <sys/time.h>
+#include <thread>
+#include <mutex>
 
 static int64_t systemTimeNs() {
     struct timeval t;
@@ -27,6 +31,10 @@ static int64_t GetNowMs()
     return systemTimeNs() / 1000000ll;
 }
 
+static int64_t GetNowUs() {
+    return systemTimeNs() / 1000ll;
+}
+
 @interface KFH264Encoder()
 @property (nonatomic, strong) AVEncoder* encoder;
 @property (nonatomic, strong) NSData *naluStartCode;
@@ -38,10 +46,54 @@ static int64_t GetNowMs()
 @end
 
 @implementation KFH264Encoder
+{
+    std::chrono::steady_clock::time_point m_epoch;
+    std::chrono::steady_clock::time_point m_nextMixTime;
+    std::chrono::steady_clock::time_point m_lastMixTime;
+    double m_frameDuration;
+    double m_bufferDuration;
+    std::thread m_mixThread;
+    
+    std::mutex  m_mixMutex;
+    std::condition_variable m_mixThreadCond;
+    
+    std::atomic<bool> m_exiting;
+
+
+}
 
 - (void) dealloc {
     [_encoder shutdown];
+    
+    m_exiting = true;
+    m_mixThreadCond.notify_all();
+    if(m_mixThread.joinable()) {
+        m_mixThread.join();
+    }
 }
+
+-(void)start
+{
+    m_mixThread = std::thread([self]() {
+        pthread_setname_np("com.videocore.audiomixer");
+        [self mixThread];
+    });
+}
+
+-(void)mixThread
+{
+    const auto us = std::chrono::microseconds(static_cast<long long>(m_frameDuration * 1000000.)) ;
+    
+    const auto start = m_epoch;
+
+    NSLog(@"Exiting audio mixer...\n");
+}
+
+/*! ITransform::setEpoch */
+-(void) setEpoch:(const std::chrono::steady_clock::time_point) epoch {
+    m_epoch = epoch;
+    m_nextMixTime = epoch;
+};
 
 - (instancetype) initWithBitrate:(NSUInteger)bitrate width:(int)width height:(int)height {
     if (self = [super initWithBitrate:bitrate]) {
@@ -76,29 +128,14 @@ static int64_t GetNowMs()
     _encoder.bitrate = self.bitrate;
 }
 
-//- (void) encodeSampleBuffer:(CMSampleBufferRef)sampleBuffer {
-//    CMTime pts = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
-//    if (!_timescale) {
-//        _timescale = pts.timescale;
-//    }
-//    [_encoder encodeFrame:sampleBuffer];
-//}
-
 - (void) encodeSampleBuffer:(CMSampleBufferRef)sampleBuffer {
-    CMTime pts;
-//    CMTimeGetSeconds(pts);
-    
-    pts = CMTimeMake(0, 0);
-    
-    //int64_t pts = GetNowMs();
-    
-    //CMTime pts = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
+    CMTime pts = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
+    //NSLog(@"set Output end outPts:%lld, pts:%lld\n", outPts.value, pts.value);
+
     if (!_timescale) {
         _timescale = pts.timescale;
     }
-    //[_encoder encodeFrame:sampleBuffer];
-
-    [_encoder encodeFrame:sampleBuffer andPTS:pts];
+    [_encoder encodeFrame:sampleBuffer];
 }
 
 - (void) generateSPSandPPS {
@@ -136,7 +173,6 @@ static int64_t GetNowMs()
 }
 
 - (void) writeVideoFrames:(NSArray*)frames pts:(CMTime)pts {
-//- (void) writeVideoFrames:(NSArray*)frames pts:(int64_t)pts {
     NSMutableArray *totalFrames = [NSMutableArray array];
     if (self.orphanedSEIFrames.count > 0) {
         [totalFrames addObjectsFromArray:self.orphanedSEIFrames];
@@ -186,7 +222,6 @@ static int64_t GetNowMs()
 
 #if 1
 - (void) incomingVideoFrames:(NSArray*)frames ptsValue:(CMTimeValue)ptsValue {
-//- (void) incomingVideoFrames:(NSArray*)frames ptsValue:(int64_t)ptsValue {
     if (ptsValue == 0) {
         [self addOrphanedFramesFromArray:frames];
         return;

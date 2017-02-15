@@ -20,6 +20,34 @@
 #import "Kickflip.h"
 #import "Endian.h"
 
+#include "../Utilities/mediaProcess.h"
+
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v) \
+([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+#define VIDEO_CAPTURE_IOS_DEFAULT_INITIAL_FRAMERATE 25
+
+#include <chrono>
+#include <iostream>
+#include <sys/time.h>
+
+static int64_t systemTimeNs() {
+    struct timeval t;
+    t.tv_sec = t.tv_usec = 0;
+    
+    gettimeofday(&t, NULL);
+    return t.tv_sec * 1000000000LL + t.tv_usec * 1000LL;
+}
+
+static int64_t GetNowMs()
+{
+    return systemTimeNs() / 1000000ll;
+}
+
+static int64_t GetNowUs() {
+    return systemTimeNs() / 1000ll;
+}
+
 @interface KFRecorder()
 @property (nonatomic) double minBitrate;
 @property (nonatomic) BOOL hasScreenshot;
@@ -32,7 +60,9 @@
     
     double m_sampleRate;
     int m_channelCount;
-    //InterruptionHandler*   m_interruptionHandler;
+    AudioStreamBasicDescription desc;
+    int mFps;
+    void*                       mAudioPool;
 }
 
 
@@ -42,73 +72,59 @@
         [self setupSession];
         [self setupEncoders];
     }
+    
+    bool bRet = ::createAudioPool(&mAudioPool, 2048, 20);
     return self;
 }
-
-
-//@class InterruptionHandler;
-//test
-KFAACEncoder *g_aacEncoder = nil;
-
 
 
 //add by tzx
 -(void)setupAudio{
     AVAudioSession *session = [AVAudioSession sharedInstance];
     
-    //__block MicSource* bThis = this;
-
-            
-            [session setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker | AVAudioSessionCategoryOptionMixWithOthers error:nil];
+    [session setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker | AVAudioSessionCategoryOptionMixWithOthers error:nil];
             //[session setMode:AVAudioSessionModeVideoChat error:nil];
-            [session setActive:YES error:nil];
-            
-            AudioComponentDescription acd;
-            acd.componentType = kAudioUnitType_Output;
-            acd.componentSubType = kAudioUnitSubType_RemoteIO;
-            acd.componentManufacturer = kAudioUnitManufacturer_Apple;
-            acd.componentFlags = 0;
-            acd.componentFlagsMask = 0;
-            
-            m_component = AudioComponentFindNext(NULL, &acd);
-            
-            AudioComponentInstanceNew(m_component, &m_audioUnit);
-            
-//            if(excludeAudioUnit) {
-//                excludeAudioUnit(bThis->m_audioUnit);
-//            }
-            UInt32 flagOne = 1;
-            
-            AudioUnitSetProperty(m_audioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Input, 1, &flagOne, sizeof(flagOne));
-            
-            AudioStreamBasicDescription desc = {0};
-            desc.mSampleRate = 44100.0;//m_sampleRate;
-            desc.mFormatID = kAudioFormatLinearPCM;
-            desc.mFormatFlags = (kAudioFormatFlagIsSignedInteger | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked);
-            desc.mChannelsPerFrame = 1;//m_channelCount;
-            desc.mFramesPerPacket = 1;
-            desc.mBitsPerChannel = 16;
-            desc.mBytesPerFrame = desc.mBitsPerChannel / 8 * desc.mChannelsPerFrame;
-            desc.mBytesPerPacket = desc.mBytesPerFrame * desc.mFramesPerPacket;
-            
-            AURenderCallbackStruct cb;
-            cb.inputProcRefCon =  (__bridge void *)(self);   //m_audioUnit;
-            cb.inputProc = handleInputBuffer;
-            AudioUnitSetProperty(m_audioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 1, &desc, sizeof(desc));
-            AudioUnitSetProperty(m_audioUnit, kAudioOutputUnitProperty_SetInputCallback, kAudioUnitScope_Global, 1, &cb, sizeof(cb));
-            
-//            m_interruptionHandler = [[InterruptionHandler alloc] init];
-//            m_interruptionHandler->_source = m_audioUnit;
+    [session setActive:YES error:nil];
     
-//            [[NSNotificationCenter defaultCenter] addObserver:m_interruptionHandler selector:@selector(handleInterruption:) name:AVAudioSessionInterruptionNotification object:nil];
+    AudioComponentDescription acd;
+    acd.componentType = kAudioUnitType_Output;
+    acd.componentSubType = kAudioUnitSubType_RemoteIO;
+    acd.componentManufacturer = kAudioUnitManufacturer_Apple;
+    acd.componentFlags = 0;
+    acd.componentFlagsMask = 0;
     
-            AudioUnitInitialize(m_audioUnit);
-            OSStatus ret = AudioOutputUnitStart(m_audioUnit);
-            if(ret != noErr) {
-                NSLog(@"Failed to start microphone!");
-            }
-
-
+    m_component = AudioComponentFindNext(NULL, &acd);
+    
+    AudioComponentInstanceNew(m_component, &m_audioUnit);
+    
+    UInt32 flagOne = 1;
+    
+    AudioUnitSetProperty(m_audioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Input, 1, &flagOne, sizeof(flagOne));
+    
+    memset(&desc, 0, sizeof(AudioStreamBasicDescription));
+    desc.mSampleRate = 44100.0;//m_sampleRate;
+    desc.mFormatID = kAudioFormatLinearPCM;
+    desc.mFormatFlags = (kAudioFormatFlagIsSignedInteger | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked);
+    desc.mChannelsPerFrame = 1;//m_channelCount;
+    desc.mFramesPerPacket = 1;
+    desc.mBitsPerChannel = 16;
+    desc.mBytesPerFrame = desc.mBitsPerChannel / 8 * desc.mChannelsPerFrame;
+    desc.mBytesPerPacket = desc.mBytesPerFrame * desc.mFramesPerPacket;
+    
+    AURenderCallbackStruct cb;
+    cb.inputProcRefCon =  (__bridge void *)(self);
+    cb.inputProc = handleInputBuffer;
+    AudioUnitSetProperty(m_audioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 1, &desc, sizeof(desc));
+    AudioUnitSetProperty(m_audioUnit, kAudioOutputUnitProperty_SetInputCallback, kAudioUnitScope_Global, 1, &cb, sizeof(cb));
+    
+    double kPreferredIOBufferDuration = 1024.0/44100.0;
+    [session setPreferredIOBufferDuration:kPreferredIOBufferDuration error:nil];
+    
+    AudioUnitInitialize(m_audioUnit);
+    OSStatus ret = AudioOutputUnitStart(m_audioUnit);
+    if(ret != noErr) {
+        NSLog(@"Failed to start microphone!");
+    }
 }
 
 static OSStatus handleInputBuffer(void *inRefCon,
@@ -118,10 +134,6 @@ static OSStatus handleInputBuffer(void *inRefCon,
                                   UInt32 inNumberFrames,
                                   AudioBufferList *ioData)
 {
-    //AudioComponentInstance audioUnit = inRefCon;
-    
-    //videocore::iOS::MicSource* mc =static_cast<videocore::iOS::MicSource*>(inRefCon);
-    
     KFRecorder  *kfrecoder = (__bridge KFRecorder*)inRefCon;
     if(kfrecoder == Nil){
         return 0;
@@ -135,8 +147,24 @@ static OSStatus handleInputBuffer(void *inRefCon,
     AudioBufferList buffers;
     buffers.mNumberBuffers = 1;
     buffers.mBuffers[0] = buffer;
+    AudioStreamBasicDescription asbd = kfrecoder->desc;
     
-    OSStatus status = AudioUnitRender(kfrecoder->m_audioUnit,
+    CMSampleBufferRef buff = NULL;
+    CMFormatDescriptionRef format = NULL;
+    OSStatus status = CMAudioFormatDescriptionCreate(kCFAllocatorDefault, &asbd, 0, NULL, 0, NULL, NULL, &format);
+    if (status) {
+        return status;
+    }
+    
+    int64_t timeVale = GetNowUs();
+    CMSampleTimingInfo timing = { CMTimeMake(1, 44100), kCMTimeZero, kCMTimeInvalid };
+    
+    status = CMSampleBufferCreate(kCFAllocatorDefault, NULL, false, NULL, NULL, format, (CMItemCount)1024, 1, &timing, 0, NULL, &buff);
+    if (status) { //失败
+        return status;
+    }
+    
+    status = AudioUnitRender(kfrecoder->m_audioUnit,
                                       ioActionFlags,
                                       inTimeStamp,
                                       inBusNumber,
@@ -144,27 +172,45 @@ static OSStatus handleInputBuffer(void *inRefCon,
                                       &buffers);
     
     if(!status) {
-        //mc->inputCallback((uint8_t*)buffers.mBuffers[0].mData, buffers.mBuffers[0].mDataByteSize, inNumberFrames);
+        ::pushAudioFrame(kfrecoder->mAudioPool, (uint8_t*)buffers.mBuffers[0].mData, buffers.mBuffers[0].mDataByteSize);
         
+        unsigned char * pData = NULL;
+        int frameSize = 0;
+        bool bRet =::getAudioFrameBegin(kfrecoder->mAudioPool, &pData, &frameSize);
+        if(bRet == false){
+            return 0;
+        }
+        buffers.mBuffers[0].mData = pData;
+        buffers.mBuffers[0].mDataByteSize = frameSize;
         
-        //[g_aacEncoder encodePCMBuffer:buffers];
-        [kfrecoder inputCallback:buffers];
+        //NSLog(@"buffers.mBuffers[0].mDataByteSize:%d",buffers.mBuffers[0].mDataByteSize);
+        status = CMSampleBufferSetDataBufferFromAudioBufferList(buff, kCFAllocatorDefault, kCFAllocatorDefault, 0, &buffers);
+        if (!status) {
+            [kfrecoder inputCallback:buff];
+        }
+        ::getAudioFrameEnd(kfrecoder->mAudioPool);
     }
     return status;
 }
 
 
--(void) inputCallback:(AudioBufferList)pcmBuffer
+-(void) inputCallback:(CMSampleBufferRef)sampleBuffer
 {
     if (!_isRecording) {
         return;
     }
-    [_aacEncoder encodePCMBuffer:pcmBuffer];
+    
+    CMSampleBufferRef sampleBuf = [self adjustTime:sampleBuffer withUs:GetNowMs()];
+    
+    CMTime pts = CMSampleBufferGetPresentationTimeStamp(sampleBuf);
+    //NSLog(@"auido pts:%lld\n", pts.value);
+    
+    [_aacEncoder encodeSampleBuffer:sampleBuf];
+    
+    CFRelease(sampleBuf);
 }
 
 //end by tzx
-
-
 
 - (AVCaptureDevice *)audioDevice
 {
@@ -202,7 +248,9 @@ static OSStatus handleInputBuffer(void *inRefCon,
     _aacEncoder.delegate = self;
     _aacEncoder.addADTSHeader = YES;
     
-    g_aacEncoder = _aacEncoder;
+    
+    const auto epoch = std::chrono::steady_clock::now();
+
 }
 
 - (void) setupAudioCapture {
@@ -231,6 +279,106 @@ static OSStatus handleInputBuffer(void *inRefCon,
     _audioConnection = [_audioOutput connectionWithMediaType:AVMediaTypeAudio];
 }
 
+//add by tzx
+
+
+- (AVFrameRateRange*)frameRateRangeForFrameRate:(double)frameRate andINPUT:(AVCaptureDeviceInput*) videoInput{
+    for (AVFrameRateRange* range in
+         videoInput.device.activeFormat.videoSupportedFrameRateRanges)
+    {
+        if (range.minFrameRate <= frameRate && frameRate <= range.maxFrameRate)
+        {
+            return range;
+        }
+    }
+    return nil;
+}
+
+
+//调整媒体数据的时间
+- (CMSampleBufferRef)adjustTime:(CMSampleBufferRef)sample by:(CMTime)offset
+{
+    CMItemCount count;
+    CMSampleBufferGetSampleTimingInfoArray(sample, 0, nil, &count);
+    CMSampleTimingInfo* pInfo = (CMSampleTimingInfo*)malloc(sizeof(CMSampleTimingInfo) * count);
+    CMSampleBufferGetSampleTimingInfoArray(sample, count, pInfo, &count);
+    
+    for (CMItemCount i = 0; i < count; i++) {
+        pInfo[i].decodeTimeStamp = CMTimeSubtract(pInfo[i].decodeTimeStamp, offset);
+        pInfo[i].presentationTimeStamp = CMTimeSubtract(pInfo[i].presentationTimeStamp, offset);
+    }
+    
+    CMSampleBufferRef sout;
+    CMSampleBufferCreateCopyWithNewTiming(nil, sample, count, pInfo, &sout);
+    free(pInfo);
+    return sout;
+}
+
+
+//调整媒体数据的时间
+- (CMSampleBufferRef)adjustTime:(CMSampleBufferRef)sample withUs:(int64_t)timeUs
+{
+    CMItemCount count;
+    CMSampleBufferGetSampleTimingInfoArray(sample, 0, nil, &count);
+    CMSampleTimingInfo* pInfo = (CMSampleTimingInfo*)malloc(sizeof(CMSampleTimingInfo) * count);
+    CMSampleBufferGetSampleTimingInfoArray(sample, count, pInfo, &count);
+    
+    for (CMItemCount i = 0; i < count; i++) {
+        pInfo[i].decodeTimeStamp =  CMTimeMake(timeUs, 1000000);///CMTimeSubtract(pInfo[i].decodeTimeStamp, offset);
+        pInfo[i].presentationTimeStamp = CMTimeMake(timeUs, 1000000);//CMTimeSubtract(pInfo[i].presentationTimeStamp, offset);
+    }
+    
+    CMSampleBufferRef sout;
+    CMSampleBufferCreateCopyWithNewTiming(nil, sample, count, pInfo, &sout);
+    free(pInfo);
+    return sout;
+}
+
+// Yes this "lockConfiguration" is somewhat silly but we're now setting
+// the frame rate in initCapture *before* startRunning is called to
+// avoid contention, and we already have a config lock at that point.
+- (void)setActiveFrameRateImpl:(double)frameRate  andLocnfig:(BOOL) lockConfiguration  andINPUT:(AVCaptureDeviceInput*) videoInput
+{
+    
+//    if (!_videoOutput || !_videoInput) {
+//        return;
+//    }
+    
+    AVFrameRateRange* frameRateRange =
+    [self frameRateRangeForFrameRate:frameRate andINPUT:videoInput];
+    if (nil == frameRateRange) {
+        NSLog(@"unsupported frameRate %f", frameRate);
+        return;
+    }
+    CMTime desiredMinFrameDuration = CMTimeMake(1, frameRate);
+    CMTime desiredMaxFrameDuration = CMTimeMake(1, frameRate); // iOS 8 fix
+    /*frameRateRange.maxFrameDuration*/;
+    
+    if(lockConfiguration) [_session beginConfiguration];
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        NSError* error;
+        if ([videoInput.device lockForConfiguration:&error]) {
+            [videoInput.device
+             setActiveVideoMinFrameDuration:desiredMinFrameDuration];
+            [videoInput.device
+             setActiveVideoMaxFrameDuration:desiredMaxFrameDuration];
+            [videoInput.device unlockForConfiguration];
+        } else {
+            NSLog(@"%@", error);
+        }
+    } else {
+        AVCaptureConnection *conn =
+        [_videoOutput connectionWithMediaType:AVMediaTypeVideo];
+        if (conn.supportsVideoMinFrameDuration)
+            conn.videoMinFrameDuration = desiredMinFrameDuration;
+        if (conn.supportsVideoMaxFrameDuration)
+            conn.videoMaxFrameDuration = desiredMaxFrameDuration;
+    }
+    if(lockConfiguration) [_session commitConfiguration];
+}
+//end by
+
 - (void) setupVideoCapture {
     NSError *error = nil;
     AVCaptureDevice* videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -251,6 +399,9 @@ static OSStatus handleInputBuffer(void *inRefCon,
     _videoOutput.alwaysDiscardsLateVideoFrames = YES;
     if ([_session canAddOutput:_videoOutput]) {
         [_session addOutput:_videoOutput];
+        
+//        //add by tzx
+        [self setActiveFrameRateImpl:VIDEO_CAPTURE_IOS_DEFAULT_INITIAL_FRAMERATE andLocnfig:(BOOL)FALSE andINPUT:videoInput];
     }
     _videoConnection = [_videoOutput connectionWithMediaType:AVMediaTypeVideo];
 }
@@ -271,6 +422,14 @@ static OSStatus handleInputBuffer(void *inRefCon,
     if (!_isRecording) {
         return;
     }
+    
+    
+    int64_t timeVale = GetNowMs();
+    CMSampleBufferRef sampleBuf = [self adjustTime:sampleBuffer withUs:timeVale];
+    
+    CMTime pts = CMSampleBufferGetPresentationTimeStamp(sampleBuf);
+    NSLog(@" pts:%lld\n", pts.value);
+    
     // pass frame to encoders
     if (connection == _videoConnection) {
         if (!_hasScreenshot) {
@@ -280,10 +439,14 @@ static OSStatus handleInputBuffer(void *inRefCon,
             [imageData writeToFile:path atomically:NO];
             _hasScreenshot = YES;
         }
-        [_h264Encoder encodeSampleBuffer:sampleBuffer];
+        
+
+        [_h264Encoder encodeSampleBuffer:sampleBuf];
+        
     } else if (connection == _audioConnection) {
-        [_aacEncoder encodeSampleBuffer:sampleBuffer];
+        [_aacEncoder encodeSampleBuffer:sampleBuf];
     }
+    CFRelease(sampleBuf);
 }
 
 // Create a UIImage from sample buffer data
@@ -330,7 +493,7 @@ static OSStatus handleInputBuffer(void *inRefCon,
 - (void) setupSession {
     _session = [[AVCaptureSession alloc] init];
     [self setupVideoCapture];
-   // [self setupAudioCapture];
+    //[self setupAudioCapture];
     
     [self setupAudio];
 

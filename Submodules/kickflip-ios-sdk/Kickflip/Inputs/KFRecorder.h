@@ -16,6 +16,7 @@
 @class KFRecorder, KFHLSWriter, KFStream;
 
 @protocol KFRecorderDelegate <NSObject>
+- (void) setFPS:(int)fps;
 - (void) recorderDidStartRecording:(KFRecorder*)recorder error:(NSError*)error;
 - (void) recorderDidFinishRecording:(KFRecorder*)recorder error:(NSError*)error;
 - (void) recorder:(KFRecorder*)recorder streamReadyAtURL:(NSURL*)url;

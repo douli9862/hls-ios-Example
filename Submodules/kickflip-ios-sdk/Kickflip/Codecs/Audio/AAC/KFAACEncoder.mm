@@ -12,6 +12,12 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "KFFrame.h"
 
+#include <chrono>
+#include <iostream>
+#include <sys/time.h>
+#include <thread>
+#include <mutex>
+
 #include <sys/time.h>
 
 static int64_t systemTimeNs() {
@@ -37,11 +43,89 @@ static int64_t GetNowMs()
 @end
 
 @implementation KFAACEncoder
+{
+    std::chrono::steady_clock::time_point m_epoch;
+    std::chrono::steady_clock::time_point m_nextMixTime;
+    std::chrono::steady_clock::time_point m_lastMixTime;
+    double m_frameDuration;
+    double m_bufferDuration;
+    std::thread m_mixThread;
+    
+    std::mutex  m_mixMutex;
+    std::condition_variable m_mixThreadCond;
+    
+    std::atomic<bool> m_exiting;
+}
 
 - (void) dealloc {
     AudioConverterDispose(_audioConverter);
     free(_aacBuffer);
 }
+
+-(void)start
+{
+    m_mixThread = std::thread([self]() {
+        pthread_setname_np("com.videocore.audiomixer");
+        [self mixThread];
+    });
+}
+
+-(void)mixThread
+{
+    const auto us = std::chrono::microseconds(static_cast<long long>(m_frameDuration * 1000000.)) ;
+    
+    const auto start = m_epoch;
+    
+    //    m_nextMixTime = start;
+    //    m_currentWindow->start = start;
+    //    m_currentWindow->next->start = start + us;
+    //
+    //    while(!m_exiting.load()) {
+    //        std::unique_lock<std::mutex> l(m_mixMutex);
+    //
+    //        auto now = std::chrono::steady_clock::now();
+    //
+    //        if( now >= m_currentWindow->next->start ) {
+    //
+    //            auto currentTime = m_nextMixTime;
+    //
+    //
+    //            MixWindow* currentWindow = m_currentWindow;
+    //            MixWindow* nextWindow = currentWindow->next;
+    //
+    //            nextWindow->start = currentWindow->start + us;
+    //            nextWindow->next->start = nextWindow->start + us;
+    //
+    //            m_nextMixTime = currentWindow->start;
+    //
+    //            AudioBufferMetadata md ( std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - m_epoch).count() );
+    //            std::shared_ptr<videocore::ISource> blank;
+    //
+    //            md.setData(m_outFrequencyInHz, m_outBitsPerChannel, m_outChannelCount, 0, 0, (int)currentWindow->size, false, false, blank);
+    //            auto out = m_output.lock();
+    //
+    //            if(out && m_outgoingWindow) {
+    //                out->pushBuffer(m_outgoingWindow->buffer, m_outgoingWindow->size, md);
+    //                m_outgoingWindow->clear();
+    //            }
+    //            m_outgoingWindow = currentWindow;
+    //
+    //            m_currentWindow = nextWindow;
+    //
+    //        }
+    //        if(!m_exiting.load()) {
+    //            m_mixThreadCond.wait_until(l, m_currentWindow->next->start);
+    //        }
+    //    }
+    NSLog(@"Exiting audio mixer...\n");
+}
+
+/*! ITransform::setEpoch */
+-(void) setEpoch:(const std::chrono::steady_clock::time_point) epoch {
+    m_epoch = epoch;
+    m_nextMixTime = epoch;
+};
+
 
 - (instancetype) initWithBitrate:(NSUInteger)bitrate sampleRate:(NSUInteger)sampleRate channels:(NSUInteger)channels {
     if (self = [super initWithBitrate:bitrate sampleRate:sampleRate channels:channels]) {
@@ -51,7 +135,7 @@ static int64_t GetNowMs()
         _pcmBuffer = NULL;
         _aacBufferSize = 1024;
         _addADTSHeader = NO;
-        _aacBuffer = malloc(_aacBufferSize * sizeof(uint8_t));
+        _aacBuffer = (uint8_t *)malloc(_aacBufferSize * sizeof(uint8_t));
         memset(_aacBuffer, 0, _aacBufferSize);
     }
     return self;
@@ -170,42 +254,6 @@ static OSStatus inInputDataProc(AudioConverterRef inAudioConverter, UInt32 *ioNu
 }
 
 
-//add by tzx
-- (void) encodePCMBuffer:(AudioBufferList)outAudioBufferList //add by tzx
-{
-    OSStatus status;
-    NSError *error = nil;
-    NSData *data = nil;
-//    if (status == 0)
-//    {
-        NSData *rawAAC = [NSData dataWithBytes:outAudioBufferList.mBuffers[0].mData length:outAudioBufferList.mBuffers[0].mDataByteSize];
-        if (_addADTSHeader) {
-            NSData *adtsHeader = [self adtsDataForPacketLength:rawAAC.length];
-            NSMutableData *fullData = [NSMutableData dataWithData:adtsHeader];
-            [fullData appendData:rawAAC];
-            data = fullData;
-        } else {
-            data = rawAAC;
-        }
-    //}
-//else {
-//        error = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil];
-//    }
-    CMTime pts;
-    CMTimeGetSeconds(pts);
-    //pts.epoch = std::chrono::steady_clock::now();
-    
-    if (self.delegate) {
-        KFFrame *frame = [[KFFrame alloc] initWithData:data pts:pts];
-        dispatch_async(self.callbackQueue, ^{
-            [self.delegate encoder:self encodedFrame:frame];
-        });
-    }
-
-}
-//end by tzx
-
-#if 0
 - (void) encodeSampleBuffer:(CMSampleBufferRef)sampleBuffer {
     CFRetain(sampleBuffer);
     dispatch_async(self.encoderQueue, ^{
@@ -251,13 +299,14 @@ static OSStatus inInputDataProc(AudioConverterRef inAudioConverter, UInt32 *ioNu
             KFFrame *frame = [[KFFrame alloc] initWithData:data pts:pts];
             dispatch_async(self.callbackQueue, ^{
                 [self.delegate encoder:self encodedFrame:frame];
+                
+                const auto us = std::chrono::microseconds(static_cast<long long>(40 * 1000000.)); //add by tzx
             });
         }
         CFRelease(sampleBuffer);
         CFRelease(blockBuffer);
    });
 }
-#endif
 
 
 /**
@@ -271,7 +320,7 @@ static OSStatus inInputDataProc(AudioConverterRef inAudioConverter, UInt32 *ioNu
  **/
 - (NSData*) adtsDataForPacketLength:(NSUInteger)packetLength {
     int adtsLength = 7;
-    char *packet = malloc(sizeof(char) * adtsLength);
+    char *packet = (char *)malloc(sizeof(char) * adtsLength);
     // Variables Recycled by addADTStoPacket
     int profile = 2;  //AAC LC
     //39=MediaCodecInfo.CodecProfileLevel.AACObjectELD;

@@ -351,6 +351,8 @@ static unsigned int to_host(unsigned char* p)
             }
         }
         [_writer encodeFrame:sampleBuffer];
+        
+        //[_writer encodeFrame:sampleBuffer withPresentationTime:prestime];
     }
 }
 
