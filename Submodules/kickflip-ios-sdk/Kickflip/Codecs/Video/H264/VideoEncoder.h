@@ -28,5 +28,7 @@
 - (void) finishWithCompletionHandler:(void (^)(void))handler;
 - (BOOL) encodeFrame:(CMSampleBufferRef) sampleBuffer;
 
+- (BOOL) encodeFrame:(CMSampleBufferRef) sampleBuffer withPresentationTime:(CMTime)pts; //add by tzx
+
 
 @end

@@ -9,6 +9,9 @@
 #import "VideoEncoder.h"
 
 @implementation VideoEncoder
+{
+    void*                  m_pixelBuffers;
+}
 
 @synthesize path = _path;
 
@@ -35,8 +38,8 @@
         AVVideoHeightKey: @(height),
         AVVideoCompressionPropertiesKey: @{
              AVVideoAverageBitRateKey: @(self.bitrate),
-             AVVideoMaxKeyFrameIntervalKey: @(150),
-             AVVideoProfileLevelKey: AVVideoProfileLevelH264BaselineAutoLevel,
+             AVVideoMaxKeyFrameIntervalKey: @(50),//@(150),
+             AVVideoProfileLevelKey: AVVideoProfileLevelH264Baseline31,//AVVideoProfileLevelH264BaselineAutoLevel,
              AVVideoAllowFrameReorderingKey: @NO,
              //AVVideoH264EntropyModeKey: AVVideoH264EntropyModeCAVLC,
              //AVVideoExpectedSourceFrameRateKey: @(30),
@@ -53,6 +56,61 @@
     if (_writer.status == AVAssetWriterStatusWriting) {
         [_writer finishWritingWithCompletionHandler: handler];
     }
+}
+
+- (BOOL) encodeFrame:(CMSampleBufferRef) sampleBuffer withPresentationTime:(CMTime)pts
+{
+    CMTime pts1 = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
+
+    if (CMSampleBufferDataIsReady(sampleBuffer))
+    {
+        if (_writer.status == AVAssetWriterStatusUnknown)
+        {
+            CMTime startTime = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
+            [_writer startWriting];
+            [_writer startSessionAtSourceTime:startTime];
+        }
+        if (_writer.status == AVAssetWriterStatusFailed)
+        {
+            NSLog(@"writer error %@", _writer.error.localizedDescription);
+            return NO;
+        }
+        if (_writerInput.readyForMoreMediaData == YES)
+        {
+            //[_writerInput appendSampleBuffer:sampleBuffer];
+            
+            CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+            
+            AVAssetWriterInputPixelBufferAdaptor* adaptor = (__bridge AVAssetWriterInputPixelBufferAdaptor*)m_pixelBuffers;
+            BOOL ready = adaptor.assetWriterInput.readyForMoreMediaData;
+            
+            if(!ready) {
+                return false;
+            }
+            
+            
+            //- (BOOL)appendPixelBuffer:(CVPixelBufferRef)pixelBuffer withPresentationTime:(CMTime)presentationTime;
+            CVPixelBufferRef pixelBuffer = imageBuffer;
+            
+            CVPixelBufferLockBaseAddress(pixelBuffer, kCVPixelBufferLock_ReadOnly);
+            @try {
+                //[adaptor appendPixelBuffer:pb withPresentationTime:presentationTime];
+                [adaptor appendPixelBuffer:pixelBuffer withPresentationTime:pts1];
+
+            } @catch (NSException* e) {
+                NSLog(@"%@", e);
+//                m_queue.enqueue_sync([]{});
+//                swapWriters(true);
+                return false;
+            } @finally {
+                CVPixelBufferUnlockBaseAddress(pixelBuffer, kCVPixelBufferLock_ReadOnly);
+            }
+
+            
+            return YES;
+        }
+    }
+    return NO;
 }
 
 - (BOOL) encodeFrame:(CMSampleBufferRef) sampleBuffer

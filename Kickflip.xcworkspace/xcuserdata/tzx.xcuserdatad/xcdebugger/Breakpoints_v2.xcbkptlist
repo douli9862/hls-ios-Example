@@ -9,118 +9,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Submodules/kickflip-ios-sdk/Kickflip/API/KFAPIClient.m"
-            timestampString = "508321334.126178"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "-init"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Submodules/kickflip-ios-sdk/Kickflip/API/KFAPIClient.m"
-            timestampString = "508391395.060558"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
-            landmarkName = "-startStreamWithParameters:callbackBlock:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[KFAPIClient startStreamWithParameters:callbackBlock:]"
-                  moduleName = "Kickflip"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tzx/Documents/githubWork/hls-ios-example/Submodules/kickflip-ios-sdk/Kickflip/API/KFAPIClient.m"
-                  timestampString = "508678755.72433"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "345"
-                  endingLineNumber = "345"
-                  offsetFromSymbolStart = "364">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__55-[KFAPIClient startStreamWithParameters:callbackBlock:]_block_invoke"
-                  moduleName = "Kickflip"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tzx/Documents/githubWork/hls-ios-example/Submodules/kickflip-ios-sdk/Kickflip/API/KFAPIClient.m"
-                  timestampString = "508678755.72637"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "346"
-                  endingLineNumber = "346"
-                  offsetFromSymbolStart = "108">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Views/KFBroadcastViewController.m"
-            timestampString = "508390860.13147"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
-            landmarkName = "-willAnimateRotationToInterfaceOrientation:duration:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Views/KFBroadcastViewController.m"
-            timestampString = "508391666.216438"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "-recordButtonPressed:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Submodules/kickflip-ios-sdk/Kickflip/API/KFAPIClient.m"
-            timestampString = "508391974.85713"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "-checkOAuthCredentialsWithCallback:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Example/KFDemoViewController.m"
             timestampString = "508404712.208178"
             startingColumnNumber = "9223372036854775807"
@@ -129,38 +17,6 @@
             endingLineNumber = "182"
             landmarkName = "-apiExample"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[KFDemoViewController apiExample]"
-                  moduleName = "Kickflip"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tzx/Documents/githubWork/hls-ios-example/Example/KFDemoViewController.m"
-                  timestampString = "508678755.7298"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "182"
-                  endingLineNumber = "182"
-                  offsetFromSymbolStart = "48">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__34-[KFDemoViewController apiExample]_block_invoke"
-                  moduleName = "Kickflip"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tzx/Documents/githubWork/hls-ios-example/Example/KFDemoViewController.m"
-                  timestampString = "508678755.731238"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "182"
-                  endingLineNumber = "182"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -186,44 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "508665207.872891"
+            timestampString = "508750273.041368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "-init"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Views/KFBroadcastViewController.m"
-            timestampString = "508405449.886634"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
-            landmarkName = "-recorderDidStartRecording:error:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Views/KFBroadcastViewController.m"
-            timestampString = "508405456.809125"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
-            landmarkName = "-recorder:streamReadyAtURL:"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "-setupAudio"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -234,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Submodules/kickflip-ios-sdk/Kickflip/Codecs/Video/H264/KFH264Encoder.mm"
-            timestampString = "508677323.625308"
+            timestampString = "508770952.080766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "-generateSPSandPPS"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,27 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Submodules/kickflip-ios-sdk/Kickflip/Codecs/Video/H264/KFH264Encoder.mm"
-            timestampString = "508676149.68745"
+            timestampString = "508770952.080766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "@implementation KFH264Encoder"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Codecs/Video/H264/KFH264Encoder.mm"
-            timestampString = "508676149.68745"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "-initWithBitrate:width:height:"
             landmarkType = "7">
          </BreakpointContent>
@@ -282,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Submodules/kickflip-ios-sdk/Kickflip/Codecs/Video/H264/KFH264Encoder.mm"
-            timestampString = "508677323.625308"
+            timestampString = "508770952.080766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "-incomingVideoFrames:ptsValue:"
             landmarkType = "7">
          </BreakpointContent>
@@ -298,12 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "508665987.901554"
+            timestampString = "508759197.328061"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
-            landmarkName = "-setupVideoCapture"
+            startingLineNumber = "390"
+            endingLineNumber = "390"
+            landmarkName = "-startRecording"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -314,60 +122,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "508665987.901554"
+            timestampString = "508759197.328061"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
-            landmarkName = "-encoder:encodedFrame:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "508665987.901554"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "293"
-            endingLineNumber = "293"
-            landmarkName = "-imageFromSampleBuffer:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "508665987.901554"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "276"
-            endingLineNumber = "276"
-            landmarkName = "-captureOutput:didOutputSampleBuffer:fromConnection:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSManifestGenerator.m"
-            timestampString = "508420239.637918"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "-initWithTargetDuration:playlistType:"
+            startingLineNumber = "467"
+            endingLineNumber = "467"
+            landmarkName = "-stopRecording"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -378,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSUploader.m"
-            timestampString = "508422652.698111"
+            timestampString = "508823001.245043"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "-initWithDirectoryPath:stream:"
             landmarkType = "7">
          </BreakpointContent>
@@ -394,12 +154,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "508665987.901554"
+            timestampString = "508759197.328061"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
-            landmarkName = "-setupHLSWriterWithEndpoint:"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
+            landmarkName = "-setupVideoCapture"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -442,12 +202,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "508665987.901554"
+            timestampString = "508759197.328061"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
-            landmarkName = "-setupEncoders"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
+            landmarkName = "-setupVideoCapture"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -457,29 +217,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSManifestGenerator.m"
-            timestampString = "508425790.697682"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "-header"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "508665987.901554"
+            timestampString = "508759197.328061"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
-            landmarkName = "-encoder:encodedFrame:"
+            startingLineNumber = "425"
+            endingLineNumber = "425"
+            landmarkName = "-reverseGeocodeStream:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -490,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Submodules/kickflip-ios-sdk/Kickflip/Codecs/Video/H264/KFH264Encoder.mm"
-            timestampString = "508677323.625308"
+            timestampString = "508770952.080766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "-writeVideoFrames:pts:"
             landmarkType = "7">
          </BreakpointContent>
@@ -522,12 +266,122 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "508665987.901554"
+            timestampString = "508759197.328061"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "351"
-            endingLineNumber = "351"
-            landmarkName = "-startRecording"
+            startingLineNumber = "525"
+            endingLineNumber = "525"
+            landmarkName = "@implementation KFRecorder"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
+            timestampString = "508759197.328061"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "647"
+            endingLineNumber = "647">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/FFmpegWrapper/FFmpegWrapper/FFOutputFile.m"
+            timestampString = "508848811.318969"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "-writePacket:error:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
+            timestampString = "508759197.328061"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "handleInputBuffer()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Codecs/Audio/AAC/KFAACEncoder.m"
+            timestampString = "508756357.054198"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "-encodeSampleBuffer:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Codecs/Audio/AAC/KFAACEncoder.m"
+            timestampString = "508756357.054198"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "-encodeSampleBuffer:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
+            timestampString = "508759197.328061"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "423"
+            endingLineNumber = "423"
+            landmarkName = "-reverseGeocodeStream:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Codecs/Video/H264/AVEncoder.mm"
+            timestampString = "508748353.951974"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
+            landmarkName = "-encodeFrame:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -538,11 +392,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "508678755.538076"
+            timestampString = "508759197.328061"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "473"
-            endingLineNumber = "473"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
+            landmarkName = "@implementation KFRecorder"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Codecs/Video/H264/VideoEncoder.m"
+            timestampString = "508751781.048714"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "-encodeFrame:withPresentationTime:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
+            timestampString = "508759197.328061"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "442"
+            endingLineNumber = "442"
             landmarkName = "-stopRecording"
             landmarkType = "7">
          </BreakpointContent>
@@ -553,13 +439,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Views/KFBroadcastViewController.m"
-            timestampString = "508658709.036949"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
+            timestampString = "508759197.328061"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
-            landmarkName = "-recorderDidFinishRecording:error:"
+            startingLineNumber = "432"
+            endingLineNumber = "432"
+            landmarkName = "-reverseGeocodeStream:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -570,12 +456,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "508665980.264206"
+            timestampString = "508759197.328061"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
-            landmarkName = "-captureOutput:didOutputSampleBuffer:fromConnection:"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
+            landmarkName = "-setupAudioCapture"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
+            timestampString = "508759197.328061"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
+            landmarkName = "-audioDevice"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
+            timestampString = "508759197.328061"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
+            landmarkName = "-setupSession"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -586,12 +504,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Submodules/kickflip-ios-sdk/Kickflip/Codecs/Audio/AAC/KFAACEncoder.m"
-            timestampString = "508676149.68745"
+            timestampString = "508757863.833554"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
-            landmarkName = "-encodePCMBuffer:"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "-encodeSampleBuffer:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -602,12 +520,108 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Submodules/kickflip-ios-sdk/Kickflip/Codecs/Audio/AAC/KFAACEncoder.m"
-            timestampString = "508676878.216331"
+            timestampString = "508758805.484733"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
-            landmarkName = "-encodePCMBuffer:"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
+            landmarkName = "-encodeSampleBuffer:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Codecs/Audio/AAC/KFAACEncoder.m"
+            timestampString = "508758859.125696"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
+            landmarkName = "-copyPCMSamplesIntoBuffer:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
+            timestampString = "508759189.244309"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "handleInputBuffer()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Codecs/Audio/AAC/KFAACEncoder.m"
+            timestampString = "508759235.722636"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
+            landmarkName = "-encodeSampleBuffer:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/API/KFAPIClient.m"
+            timestampString = "508761654.307098"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "-init"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.mm"
+            timestampString = "508820976.71769"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
+            landmarkName = "handleInputBuffer(void *inRefCon, AudioUnitRenderActionFlags *ioActionFlags, const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber, UInt32 inNumberFrames, AudioBufferList *ioData)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/FFmpegWrapper/FFmpegWrapper/FFOutputFile.m"
+            timestampString = "508767588.514706"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "-formatContextForOutputPath:options:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -618,7 +632,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pods/FFmpegWrapper/FFmpegWrapper/FFmpegWrapper.m"
-            timestampString = "508667836.828138"
+            timestampString = "508768937.744426"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "-convertInputPath:outputPath:options:progressBlock:completionBlock:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/FFmpegWrapper/FFmpegWrapper/FFmpegWrapper.m"
+            timestampString = "508768941.378039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "128"
@@ -633,13 +663,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSWriter.m"
-            timestampString = "508676878.216331"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.mm"
+            timestampString = "508820976.71769"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "-processEncodedData:presentationTimestamp:streamIndex:isKeyFrame:"
+            startingLineNumber = "385"
+            endingLineNumber = "385"
+            landmarkName = "-encoder:encodedFrame:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -650,12 +680,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pods/FFmpegWrapper/FFmpegWrapper/FFOutputFile.m"
-            timestampString = "508670733.021164"
+            timestampString = "508773054.382283"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
-            landmarkName = "-writePacket:error:"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "-openFileForWritingWithError:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -665,13 +695,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Codecs/Video/H264/KFH264Encoder.mm"
-            timestampString = "508677372.657249"
+            filePath = "Pods/FFmpegWrapper/FFmpegWrapper/FFOutputStream.m"
+            timestampString = "508774136.105755"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "-encodeSampleBuffer:"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "-initWithOutputFile:outputCodec:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -681,14 +711,126 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "508678568.576372"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.mm"
+            timestampString = "508820976.71769"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "handleInputBuffer()"
+            startingLineNumber = "409"
+            endingLineNumber = "409"
+            landmarkName = "-captureOutput:didOutputSampleBuffer:fromConnection:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSWriter.m"
+            timestampString = "508904609.84638"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "-processEncodedData:presentationTimestamp:streamIndex:isKeyFrame:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSWriter.m"
+            timestampString = "508904609.84638"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "-processEncodedData:presentationTimestamp:streamIndex:isKeyFrame:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSManifestGenerator.m"
+            timestampString = "508837329.737704"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "-appendFromLiveManifest:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSUploader.m"
+            timestampString = "508827186.03575"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "-detectNewSegmentsFromFiles:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFDirectoryWatcher.m"
+            timestampString = "508831543.200067"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "-kqueueFired"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFDirectoryWatcher.m"
+            timestampString = "508831690.647455"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "KQCallback()"
             landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFDirectoryWatcher.m"
+            timestampString = "508831575.112787"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "+watchFolderWithPath:delegate:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -697,14 +839,318 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "508678658.441789"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSUploader.m"
+            timestampString = "508837761.31463"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "284"
+            endingLineNumber = "284"
+            landmarkName = "-s3RequestCompletedForFileName:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[KFHLSUploader s3RequestCompletedForFileName:]"
+                  moduleName = "Kickflip"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tzx/Documents/githubWork/hls-ios-Example/Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSUploader.m"
+                  timestampString = "508910241.124662"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "284"
+                  endingLineNumber = "284"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__47-[KFHLSUploader s3RequestCompletedForFileName:]_block_invoke"
+                  moduleName = "Kickflip"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tzx/Documents/githubWork/hls-ios-Example/Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSUploader.m"
+                  timestampString = "508910241.126572"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "284"
+                  endingLineNumber = "284"
+                  offsetFromSymbolStart = "22">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSUploader.m"
+            timestampString = "508839217.132754"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "285"
+            endingLineNumber = "285"
+            landmarkName = "-s3RequestCompletedForFileName:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSUploader.m"
+            timestampString = "508837766.085666"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "304"
+            endingLineNumber = "304"
+            landmarkName = "-s3RequestCompletedForFileName:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSUploader.m"
+            timestampString = "508837774.322913"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "340"
+            endingLineNumber = "340"
+            landmarkName = "-s3RequestCompletedForFileName:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSManifestGenerator.m"
+            timestampString = "508838308.262539"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "-appendFromLiveManifest:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSManifestGenerator.m"
+            timestampString = "508839000.930364"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "127"
             endingLineNumber = "127"
-            landmarkName = "handleInputBuffer()"
-            landmarkType = "9">
+            landmarkName = "-manifestString"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSUploader.m"
+            timestampString = "508839206.325025"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
+            landmarkName = "-manifestURL"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSUploader.m"
+            timestampString = "508839229.689384"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
+            landmarkName = "-s3RequestCompletedForFileName:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__47-[KFHLSUploader s3RequestCompletedForFileName:]_block_invoke"
+                  moduleName = "Kickflip"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tzx/Documents/githubWork/hls-ios-Example/Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSUploader.m"
+                  timestampString = "508910241.155102"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "355"
+                  endingLineNumber = "355"
+                  offsetFromSymbolStart = "4228">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__47-[KFHLSUploader s3RequestCompletedForFileName:]_block_invoke.298"
+                  moduleName = "Kickflip"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tzx/Documents/githubWork/hls-ios-Example/Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSUploader.m"
+                  timestampString = "508910241.157662"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "356"
+                  endingLineNumber = "356"
+                  offsetFromSymbolStart = "83">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSUploader.m"
+            timestampString = "508839233.801587"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "344"
+            endingLineNumber = "344"
+            landmarkName = "-s3RequestCompletedForFileName:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSUploader.m"
+            timestampString = "508839427.207487"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "-finishedRecording"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSUploader.m"
+            timestampString = "508839945.102264"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "-uploadNextSegment"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSWriter.m"
+            timestampString = "508904609.84638"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "-addVideoStreamWithWidth:height:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Outputs/Muxers/HLS/KFHLSWriter.m"
+            timestampString = "508904568.146147"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "-addVideoStreamWithWidth:height:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Codecs/Video/H264/VideoEncoder.m"
+            timestampString = "508908139.691416"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "-initPath:Height:andWidth:bitrate:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Codecs/Video/H264/AVEncoder.mm"
+            timestampString = "508908167.236316"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "-initForHeight:andWidth:bitrate:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Submodules/kickflip-ios-sdk/Kickflip/Inputs/KFRecorder.mm"
+            timestampString = "508908209.653637"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
+            landmarkName = "-setupEncoders"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

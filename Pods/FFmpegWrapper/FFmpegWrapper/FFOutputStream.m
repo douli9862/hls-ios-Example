@@ -22,6 +22,11 @@
             NSLog(@"codec not found: %@", outputCodec);
         }
         self.stream = avformat_new_stream(outputFile.formatContext, codec);
+//        self.stream->time_base.num = 1; //add by tzx
+//        self.stream->time_base.den = 1000;
+//        
+//        outputFile.formatContext->streams[0]->time_base = AVRational(1, 1000);
+        
         [outputFile addOutputStream:self];
     }
     return self;
@@ -30,7 +35,8 @@
 - (void) setupVideoContextWithWidth:(int)width height:(int)height {
     AVCodecContext *c = self.stream->codec;
     avcodec_get_context_defaults3(c, NULL);
-    c->codec_id = CODEC_ID_H264;
+    //c->codec_id = CODEC_ID_H264;
+    c->codec_id = AV_CODEC_ID_H264;
     c->codec_type = AVMEDIA_TYPE_VIDEO;
     c->width    = width;
 	c->height   = height;
@@ -38,14 +44,16 @@
     c->profile = FF_PROFILE_H264_BASELINE;
     c->time_base.den = 30;
 	c->time_base.num = 1;
-    c->pix_fmt       = PIX_FMT_YUV420P;
+    //c->pix_fmt       = PIX_FMT_YUV420P;
+    c->pix_fmt       = AV_PIX_FMT_YUV420P;
 	if (self.parentFile.formatContext->oformat->flags & AVFMT_GLOBALHEADER)
 		c->flags |= CODEC_FLAG_GLOBAL_HEADER;
 }
 
 - (void) setupAudioContextWithSampleRate:(int)sampleRate {
     AVCodecContext *codecContext = self.stream->codec;
-    int codecID = CODEC_ID_AAC;
+    //int codecID = CODEC_ID_AAC;
+    int codecID = AV_CODEC_ID_AAC;
     AVCodec *codec = avcodec_find_encoder(codecID);
     if (!codec) {
         NSLog(@"audio codec not found: %d", codecID);
