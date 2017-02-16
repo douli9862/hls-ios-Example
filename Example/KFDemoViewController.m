@@ -8,7 +8,7 @@
 
 #import "KFDemoViewController.h"
 #import "Kickflip.h"
-#import "KFAPIClient.h"
+//#import "KFAPIClient.h"
 #import "KFLog.h"
 #import "KFUser.h"
 #import "YapDatabase.h"
@@ -63,6 +63,8 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
     return basePath;
 }
 
+#if 0
+
 - (void) setupDatabase {
     NSString *docs = [self applicationDocumentsDirectory];
     NSString *dbPath = [docs stringByAppendingPathComponent:@"kickflip.sqlite"];
@@ -99,6 +101,7 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
     [self.database registerExtension:databaseView withName:kKFStreamView];
 }
 
+#endif
 
 - (void) setupNavigationBarAppearance {
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -130,63 +133,6 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
-- (void) apiExample {
-//    [[KFAPIClient sharedClient] requestNewActiveUserWithUsername:@"bob" password:@"secret password" email:@"bob@example.com" displayName:@"Bob Jones" extraInfo:@{@"otherInfo": @"Any other key/values you would want"} callbackBlock:^(KFUser *activeUser, NSError *error) {
-//        if (activeUser) {
-//            NSLog(@"great, you've got a new user!");
-//        }
-//    }];
-//    [[KFAPIClient sharedClient] updateMetadataForActiveUserWithNewPassword:nil email:@"test@example.com" displayName:@"Bob Jones II" extraInfo:@{@"otherInfo": @"Any other key/values you would want"}  callbackBlock:^(KFUser *updatedUser, NSError *error) {
-//        if (updatedUser) {
-//            NSLog(@"great, you've got updated a user!");
-//        }
-//    }];
-//    
-//    [[KFAPIClient sharedClient] requestUserInfoForUsername:@"existing-username" callbackBlock:^(KFUser *existingUser, NSError *error) {
-//        if (existingUser) {
-//            NSLog(@"you got info for an existing user!");
-//        }
-//    }];
-//    
-//    [[KFAPIClient sharedClient] loginExistingUserWithUsername:@"existing-username" password:@"password" callbackBlock:^(KFUser *existingUser, NSError *error) {
-//        if (existingUser) {
-//            NSLog(@"successfully logged in existing user");
-//        }
-//    }];
-//    
-//    [[KFAPIClient sharedClient] startNewStream:^(KFStream *newStream, NSError *error) {
-//        if (newStream) {
-//            NSLog(@"it's a new stream ready for public broadcast!");
-//        }
-//    }];
-//    
-//    KFStream *stream = nil;
-//    
-//    [[KFAPIClient sharedClient] stopStream:stream callbackBlock:^(BOOL success, NSError *error) {
-//        if (success) {
-//            NSLog(@"Stream stopped");
-//        }
-//    }];
-//    
-//    [[KFAPIClient sharedClient] updateMetadataForStream:stream callbackBlock:^(KFStream *updatedStream, NSError *error) {
-//        if (updatedStream) {
-//            NSLog(@"stream updated!");
-//        }
-//    }];
-//    
-//    [[KFAPIClient sharedClient] requestStreamsByKeyword:@"skateboard" pageNumber:1 itemsPerPage:10 callbackBlock:^(NSArray *streams, KFPaginationInfo *paginationInfo, NSError *error) {
-//        NSLog(@"found %d streams", (int)streams.count);
-//    }];
-    
-    CLLocation *currentLocation = nil;
-    [[KFAPIClient sharedClient] requestStreamsForLocation:currentLocation radius:100 pageNumber:1 itemsPerPage:25 callbackBlock:^(NSArray *streams, KFPaginationInfo *paginationInfo, NSError *error) {
-        NSLog(@"found %d streams near %@", (int)streams.count, currentLocation);
-    }];
-    
-    [[KFAPIClient sharedClient] requestStreamsForUsername:@"kickflip-user" pageNumber:1 itemsPerPage:25 callbackBlock:^(NSArray *streams, KFPaginationInfo *paginationInfo, NSError *error) {
-        NSLog(@"found %d public streams for user", (int)streams.count);
-    }];
-}
 
 - (void) setupPullToRefresh {
     self.pullToRefreshView = [[SSPullToRefreshView alloc] initWithScrollView:self.streamsTableView delegate:self];
@@ -196,7 +142,7 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setupDatabase];
+    //[self setupDatabase];
 
     [self setupNavigationBarAppearance];
 
@@ -213,14 +159,13 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
     logoImageView.contentMode = UIViewContentModeScaleAspectFit;
     self.navigationItem.titleView = logoImageView;
     */
-    [self setupViewMappings];
+    //[self setupViewMappings];
     
     [self setupTableView];
-    [self setupPullToRefresh];
-    
-    //[self apiExample]; //add by tzx
+    //[self setupPullToRefresh];
 }
 
+#if 0
 - (void) setupViewMappings {
     [self.uiConnection beginLongLivedReadTransaction];
 
@@ -238,6 +183,8 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
                                                  name:YapDatabaseModifiedNotification
                                                object:self.database];
 }
+
+#endif
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -257,6 +204,8 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
 #endif
 }
 
+
+#if 0
 - (void) refreshStreams {
     [self.pullToRefreshView startLoading];
     self.currentPage = 1;
@@ -284,6 +233,7 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
         }];
     }];
 }
+#endif
 
 - (void)didReceiveMemoryWarning
 {
@@ -453,9 +403,11 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
     [self presentViewController:movieView animated:YES completion:nil];
 }
 
+#if 0
 - (void)pullToRefreshViewDidStartLoading:(SSPullToRefreshView *)view {
     [self refreshStreams];
 }
+#endif
 
 
 @end

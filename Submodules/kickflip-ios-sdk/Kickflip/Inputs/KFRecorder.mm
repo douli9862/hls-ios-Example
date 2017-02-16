@@ -538,6 +538,8 @@ static OSStatus handleInputBuffer(void *inRefCon,
 #endif
 }
 
+
+#if 0
 - (void) reverseGeocodeStream:(KFStream*)stream {
     CLLocation *location = nil;
     CLLocation *endLocation = stream.endLocation;
@@ -572,6 +574,8 @@ static OSStatus handleInputBuffer(void *inRefCon,
     }];
 }
 
+#endif
+
 - (void) stopRecording {
     
     AudioOutputUnitStop(m_audioUnit);
@@ -593,17 +597,10 @@ static OSStatus handleInputBuffer(void *inRefCon,
         if (error) {
             DDLogError(@"Error stop recording: %@", error);
         }
-        //del by tzx
-//        [[KFAPIClient sharedClient] stopStream:self.stream callbackBlock:^(BOOL success, NSError *error) {
-//            if (!success) {
-//                DDLogError(@"Error stopping stream: %@", error);
-//            } else {
-//                DDLogVerbose(@"Stream stopped: %@", self.stream.streamID);
-//            }
-//        }];
-        if ([self.stream isKindOfClass:[KFS3Stream class]]) {
-            [[KFHLSMonitor sharedMonitor] finishUploadingContentsAtFolderPath:_hlsWriter.directoryPath endpoint:(KFS3Stream*)self.stream];
-        }
+
+//        if ([self.stream isKindOfClass:[KFS3Stream class]]) {
+//            [[KFHLSMonitor sharedMonitor] finishUploadingContentsAtFolderPath:_hlsWriter.directoryPath endpoint:(KFS3Stream*)self.stream];
+//        }
         if (self.delegate && [self.delegate respondsToSelector:@selector(recorderDidFinishRecording:error:)]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.delegate recorderDidFinishRecording:self error:error];
@@ -611,6 +608,9 @@ static OSStatus handleInputBuffer(void *inRefCon,
         }
     });
 }
+
+
+#if 0
 
 - (void) uploader:(KFHLSUploader *)uploader didUploadSegmentAtURL:(NSURL *)segmentURL uploadSpeed:(double)uploadSpeed numberOfQueuedSegments:(NSUInteger)numberOfQueuedSegments {
     DDLogInfo(@"Uploaded segment %@ @ %f KB/s, numberOfQueuedSegments %d", segmentURL, uploadSpeed, numberOfQueuedSegments);
@@ -658,5 +658,6 @@ static OSStatus handleInputBuffer(void *inRefCon,
         [self reverseGeocodeStream:self.stream];
     }
 }
+#endif
 
 @end

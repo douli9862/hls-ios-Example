@@ -11,8 +11,8 @@
 #import "KFBroadcastViewController.h"
 
 @interface Kickflip()
-//@property (nonatomic, copy) NSString *apiKey;
-//@property (nonatomic, copy) NSString *apiSecret;
+@property (nonatomic, copy) NSString *apiKey;
+@property (nonatomic, copy) NSString *apiSecret;
 @property (nonatomic) NSUInteger maxBitrate;
 @property (nonatomic) BOOL useAdaptiveBitrate;
 @end
@@ -44,7 +44,6 @@ static Kickflip *_kickflip = nil;
     return self;
 }
 
-#if 0
 
 + (void) setupWithAPIKey:(NSString *)key secret:(NSString *)secret {
     Kickflip *kickflip = [Kickflip sharedInstance];
@@ -71,7 +70,6 @@ static Kickflip *_kickflip = nil;
 + (NSString*) apiSecret {
     return [Kickflip sharedInstance].apiSecret;
 }
-#endif
 
 + (void) setMaxBitrate:(double)maxBitrate {
     [Kickflip sharedInstance].maxBitrate = maxBitrate;

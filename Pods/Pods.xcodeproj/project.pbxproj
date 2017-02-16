@@ -64,7 +64,6 @@
 		15472E48FA76670ABF7950E0C532A890 /* AWSEXTRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 740472A9D527FE42CD83D2ED15AB7B60 /* AWSEXTRuntimeExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1549EF595E470E52834558FA843A9D40 /* KFRecordButton.h in Headers */ = {isa = PBXBuildFile; fileRef = E3FD7168BD15D5FDB11335F4607E3BA2 /* KFRecordButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1633F34583E2ADFF4F8E3337CA12204B /* YapNull.m in Sources */ = {isa = PBXBuildFile; fileRef = E089E7C3EF7D4759E78F3185AEB83C15 /* YapNull.m */; };
-		16D275918D3A303A5BD6632558E4C4E2 /* Kickflip.h in Headers */ = {isa = PBXBuildFile; fileRef = 39F04D743720BB0B69BC7181D0C6E8AE /* Kickflip.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		186847D0113E5261C0D7184AEE4CBE35 /* PureLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 14F177E5AFDA09636E7FEBD5AF2C9BA9 /* PureLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		19EC7AB7B62F6F3BE7C9C77D2F3DDF94 /* YapDatabaseStatement.h in Headers */ = {isa = PBXBuildFile; fileRef = FBDFE2FA3C42149407C4052CB95F2C13 /* YapDatabaseStatement.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		1A6971862E8145652427E3159BF4F38D /* NSValueTransformer+AWSMTLInversionAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = DAE05ABB9C8F4FC3A40D26579914B835 /* NSValueTransformer+AWSMTLInversionAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -116,7 +115,6 @@
 		2EABA2D97620F852C5CDF81FB8033071 /* YapCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAFF7B6526AF8F009A059A96CA834DA /* YapCache.m */; };
 		2EE951A83D7752A5320722914F0EFE90 /* YapDatabaseExtensionPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = C55413AC51814B4ACF30C0C1CA74C627 /* YapDatabaseExtensionPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		2F5130DD3374360D2C176A996CA500F1 /* AWSSynchronizedMutableDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = B6CD0C545BF4F5BD9D9850B7E6F30362 /* AWSSynchronizedMutableDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2FD4C427A217E95069818C3ECE604670 /* KFAPIClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 876B8FAC03FECFCF330DD38EE708FE51 /* KFAPIClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2FE07FFE8D913AD13A1EACB79F4D169C /* AWSTMCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A7DB1B979BAB441BD16B2609BAB58A4 /* AWSTMCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		30CA7F13772D891566BBB9A6E36885D6 /* MTLModel+NSCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B298BB42D4E17898DBA3A2A9A66264B /* MTLModel+NSCoding.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		30F811DCA36D719038DDE4D3B8793CE6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 495AF8B1144153B309EBDC819EFA8520 /* CoreGraphics.framework */; };
@@ -157,7 +155,6 @@
 		3FF5C3C4A8417213F6DCC12C003C161A /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4AA25293AE0F6A81D5C9AB99E0A4E9 /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		4115664E56615027C8011C5607252042 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADCD9BF7598E5D4EB5B14A8E6227A584 /* Security.framework */; };
 		416437EC7D171015A1C922B840CFBDF6 /* VTAcknowledgementViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1170D3EA41951209DDED24769C24CB /* VTAcknowledgementViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		417980BAE5F119A05B99A3EEAE6E9F0A /* KFAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B356BD34F6FBE47D5B3D048EF16BBC4 /* KFAPIClient.m */; };
 		41C0E68714CE3E21BD40900503AE20B4 /* KFFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D57B57BB465843CD7C87EE0137B478B /* KFFrame.m */; };
 		41C6392507F594865C23BF96C30674E0 /* YapDatabaseFilteredViewTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = BC53E2413F0D592B79FFA4393A31718B /* YapDatabaseFilteredViewTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42589C221227EB2DDAEF61C8013A6D6A /* AWSS3Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3F2656FA6BC3D82F65303D8F2FEEBF /* AWSS3Model.m */; };
@@ -248,6 +245,10 @@
 		6A029D6DE45667231FCD6BB7829D2156 /* YapDatabaseRTreeIndexOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1619EE3F8E6C74570B0F898C48172B5B /* YapDatabaseRTreeIndexOptions.m */; };
 		6A520D87DD2E4AE57F3D357BCA9D33AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA8370DA69027B6A66C2B1CA53A75F1 /* Foundation.framework */; };
 		6C28ADC799BCCB5ACB95F8F46B1EF53D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA8370DA69027B6A66C2B1CA53A75F1 /* Foundation.framework */; };
+		6C42B7A91E559B8200334433 /* Kickflip.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C42B7A71E559B8200334433 /* Kickflip.h */; };
+		6C42B7AA1E559B8200334433 /* Kickflip.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C42B7A81E559B8200334433 /* Kickflip.m */; };
+		6C42B7AD1E559DAE00334433 /* KFAPIClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C42B7AB1E559DAE00334433 /* KFAPIClient.h */; };
+		6C42B7AE1E559DAE00334433 /* KFAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C42B7AC1E559DAE00334433 /* KFAPIClient.m */; };
 		6C469BF51E5323BA0091C393 /* AudioFrameBufferPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C469BF21E5323BA0091C393 /* AudioFrameBufferPool.cpp */; };
 		6C469BF61E5323BA0091C393 /* AudioFrameBufferPool.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C469BF31E5323BA0091C393 /* AudioFrameBufferPool.h */; };
 		6C469BF71E5323BA0091C393 /* MediaDataType.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C469BF41E5323BA0091C393 /* MediaDataType.h */; };
@@ -362,7 +363,6 @@
 		9B95484458462C55A304CE8169F95B33 /* YapDatabaseCloudKitTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 976C47C4CC9124955512B890534FAC5B /* YapDatabaseCloudKitTransaction.m */; };
 		9C28B1DD9B25CCE85582D0F85F2428ED /* YapDatabaseSearchResultsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8869E753C5038CC42F15B414C0AA3725 /* YapDatabaseSearchResultsView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D42A50710E9D3D40D38C291E36C37C8 /* AWSS3TransferUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D197C3DE9F44852B36468129B029B1F /* AWSS3TransferUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9E6FCC1A4C6D6D8793FEEE4DCE48CE3F /* Kickflip.m in Sources */ = {isa = PBXBuildFile; fileRef = BC0E9890A06C496574EB97A1FED32B7B /* Kickflip.m */; };
 		9E83098F9EC1B8554F07018A8C61FB52 /* AWSSTSModel.h in Headers */ = {isa = PBXBuildFile; fileRef = B317F0DC14C293418785B1A9229FC074 /* AWSSTSModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9E9FE8CF4FC567C2A12C287D79FACCA3 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB08B66D1F488BED281573E8974F9B0F /* AFNetworkReachabilityManager.m */; };
 		9EADA01F99F4DE176BEA30A7CE827052 /* YapDatabaseRTreeIndexHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E379DDA664A3BBD5AA6EA9404EF25DF /* YapDatabaseRTreeIndexHandler.m */; };
@@ -881,7 +881,6 @@
 		0A7AFE3A746A753BF05DB9112573A2B7 /* UIProgressView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIProgressView+AFNetworking.h"; path = "UIKit+AFNetworking/UIProgressView+AFNetworking.h"; sourceTree = "<group>"; };
 		0A8D9B0E5B687565CA7D1B0F6B179475 /* YapDatabaseRTreeIndexHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YapDatabaseRTreeIndexHandler.h; path = YapDatabase/Extensions/RTreeIndex/YapDatabaseRTreeIndexHandler.h; sourceTree = "<group>"; };
 		0B329EEE34E39513D5C36CD7828AB8D7 /* KFStreamTableViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = KFStreamTableViewCell.m; sourceTree = "<group>"; };
-		0B356BD34F6FBE47D5B3D048EF16BBC4 /* KFAPIClient.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = KFAPIClient.m; sourceTree = "<group>"; };
 		0B5EDAA8F9A4536E95CEB0C76B766D14 /* CocoaLumberjack.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CocoaLumberjack.xcconfig; sourceTree = "<group>"; };
 		0B6B1D7AD138552B7FE16DD9890C47D6 /* bio.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bio.h; path = "ffmpeg-ios-static-libs/include/openssl/bio.h"; sourceTree = "<group>"; };
 		0BD5B862AAA1ABC9E28C8C675D4D5C58 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
@@ -1047,7 +1046,6 @@
 		3956EF4EF37201C1887E9074A98FD1F3 /* AWSNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AWSNetworking.m; path = AWSCore/Networking/AWSNetworking.m; sourceTree = "<group>"; };
 		3973609DAD90F3BADCCFED7A9F388238 /* version.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = version.h; path = "ffmpeg-ios-static-libs/include/libavformat/version.h"; sourceTree = "<group>"; };
 		39A4A96BAAA95AA8CD9805BB3CFECF54 /* AWSModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AWSModel.m; path = AWSCore/Utility/AWSModel.m; sourceTree = "<group>"; };
-		39F04D743720BB0B69BC7181D0C6E8AE /* Kickflip.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Kickflip.h; sourceTree = "<group>"; };
 		39FBD342EBBDEE6B86629A23BAB6AA3A /* NSString+FontAwesome.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+FontAwesome.h"; path = "BButton/Classes/NSString+FontAwesome.h"; sourceTree = "<group>"; };
 		39FD9DE93B57F4AD02F6626E6604151C /* VTAcknowledgement.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = VTAcknowledgement.h; path = Classes/VTAcknowledgement.h; sourceTree = "<group>"; };
 		3A15DFC53CBF273C39B8DCFD9B885D7F /* YDBCKRecordInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YDBCKRecordInfo.h; path = YapDatabase/Extensions/CloudKit/Utilities/YDBCKRecordInfo.h; sourceTree = "<group>"; };
@@ -1209,6 +1207,10 @@
 		6AE3E705BE5CD06636DD123027B35A5A /* DDMultiFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDMultiFormatter.h; path = Lumberjack/Extensions/DDMultiFormatter.h; sourceTree = "<group>"; };
 		6BD1BA2CE6F1FBBD4DD385D714698401 /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
 		6C41C61AF7C482F0607EFD372DAD269D /* FormatterKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FormatterKit-dummy.m"; sourceTree = "<group>"; };
+		6C42B7A71E559B8200334433 /* Kickflip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kickflip.h; sourceTree = "<group>"; };
+		6C42B7A81E559B8200334433 /* Kickflip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Kickflip.m; sourceTree = "<group>"; };
+		6C42B7AB1E559DAE00334433 /* KFAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFAPIClient.h; sourceTree = "<group>"; };
+		6C42B7AC1E559DAE00334433 /* KFAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFAPIClient.m; sourceTree = "<group>"; };
 		6C469BF21E5323BA0091C393 /* AudioFrameBufferPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioFrameBufferPool.cpp; sourceTree = "<group>"; };
 		6C469BF31E5323BA0091C393 /* AudioFrameBufferPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFrameBufferPool.h; sourceTree = "<group>"; };
 		6C469BF41E5323BA0091C393 /* MediaDataType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaDataType.h; sourceTree = "<group>"; };
@@ -1313,7 +1315,6 @@
 		866EF116487B6D9E9B2ACA24360B68B3 /* YapDatabaseCloudKitConnection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YapDatabaseCloudKitConnection.h; path = YapDatabase/Extensions/CloudKit/YapDatabaseCloudKitConnection.h; sourceTree = "<group>"; };
 		869254E35F7BF7E913EDFB2FD859124F /* KFAWSCredentialsProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = KFAWSCredentialsProvider.h; sourceTree = "<group>"; };
 		8763F366F886C4E58C771F47A2EBF05E /* AWSCore-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AWSCore-dummy.m"; sourceTree = "<group>"; };
-		876B8FAC03FECFCF330DD38EE708FE51 /* KFAPIClient.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = KFAPIClient.h; sourceTree = "<group>"; };
 		87A163C2324E616B25DA771D996E9B0C /* MTLEXTRuntimeExtensions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MTLEXTRuntimeExtensions.m; path = Mantle/extobjc/MTLEXTRuntimeExtensions.m; sourceTree = "<group>"; };
 		87D6D00A84F10E0B1405CA267B648FA5 /* AWSMTLReflection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AWSMTLReflection.h; path = AWSCore/Mantle/AWSMTLReflection.h; sourceTree = "<group>"; };
 		87D9305B2E4EEC3B20B0EDA019B0FE1C /* YapDatabaseHooksConnection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = YapDatabaseHooksConnection.m; path = YapDatabase/Extensions/Hooks/YapDatabaseHooksConnection.m; sourceTree = "<group>"; };
@@ -1489,7 +1490,6 @@
 		BB08B66D1F488BED281573E8974F9B0F /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkReachabilityManager.m; path = AFNetworking/AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		BB1363E3BBC141F2884FAF3CBBF43ABD /* vdpau.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = vdpau.h; path = "ffmpeg-ios-static-libs/include/libavcodec/vdpau.h"; sourceTree = "<group>"; };
 		BB7FCA62DA15ED9ECA20AF105FF239A4 /* NSValueTransformer+MTLPredefinedTransformerAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSValueTransformer+MTLPredefinedTransformerAdditions.m"; path = "Mantle/NSValueTransformer+MTLPredefinedTransformerAdditions.m"; sourceTree = "<group>"; };
-		BC0E9890A06C496574EB97A1FED32B7B /* Kickflip.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = Kickflip.m; sourceTree = "<group>"; };
 		BC53E2413F0D592B79FFA4393A31718B /* YapDatabaseFilteredViewTypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YapDatabaseFilteredViewTypes.h; path = YapDatabase/Extensions/FilteredViews/YapDatabaseFilteredViewTypes.h; sourceTree = "<group>"; };
 		BC724D50D9A476EF4393001C54F5E03F /* UIRefreshControl+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIRefreshControl+AFNetworking.h"; path = "UIKit+AFNetworking/UIRefreshControl+AFNetworking.h"; sourceTree = "<group>"; };
 		BD122038A2298323E1FAAF379858256B /* libSSPullToRefresh.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSSPullToRefresh.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2268,8 +2268,8 @@
 		445A2EEF884494A5951ABDA4C0C2AB22 /* Kickflip */ = {
 			isa = PBXGroup;
 			children = (
-				39F04D743720BB0B69BC7181D0C6E8AE /* Kickflip.h */,
-				BC0E9890A06C496574EB97A1FED32B7B /* Kickflip.m */,
+				6C42B7A71E559B8200334433 /* Kickflip.h */,
+				6C42B7A81E559B8200334433 /* Kickflip.m */,
 				7CFCF07F008147571DC33D250E7F0E5E /* API */,
 				09FC269F3483B1848712C151422503E1 /* Codecs */,
 				1F3755874D0A0F26B05C5B0CE9E8A8B2 /* Inputs */,
@@ -2490,8 +2490,8 @@
 		7CFCF07F008147571DC33D250E7F0E5E /* API */ = {
 			isa = PBXGroup;
 			children = (
-				876B8FAC03FECFCF330DD38EE708FE51 /* KFAPIClient.h */,
-				0B356BD34F6FBE47D5B3D048EF16BBC4 /* KFAPIClient.m */,
+				6C42B7AB1E559DAE00334433 /* KFAPIClient.h */,
+				6C42B7AC1E559DAE00334433 /* KFAPIClient.m */,
 				71C1F8B03052E320131100731C911063 /* KFPaginationInfo.h */,
 				DF772A1D1C92FD98681F220A90320A50 /* KFPaginationInfo.m */,
 				C48C27F4CD5439FC015693312DC242D1 /* KFRTMPStream.h */,
@@ -3440,7 +3440,6 @@
 			files = (
 				BBDA65A9BEE27F7233A1356997F6AA5F /* AVEncoder.h in Headers */,
 				36D4BD066828E414285965C6EE5B6B0D /* KFAACEncoder.h in Headers */,
-				2FD4C427A217E95069818C3ECE604670 /* KFAPIClient.h in Headers */,
 				069C04C465CD39706C8B39A98D245CEF /* KFAudioEncoder.h in Headers */,
 				4BC00545FA59DCDF3A13928D766193A3 /* KFAWSCredentialsProvider.h in Headers */,
 				34B572EB07BCE633CE13930045B07943 /* KFBroadcastViewController.h in Headers */,
@@ -3465,7 +3464,6 @@
 				2720D2D913BCD4C97893624EE51923C6 /* KFUser.h in Headers */,
 				01076006842E78CFF357C5D8F0894DEA /* KFVideoEncoder.h in Headers */,
 				F6CD43D2F7AE038942D5FE7899D898C0 /* KFVideoFrame.h in Headers */,
-				16D275918D3A303A5BD6632558E4C4E2 /* Kickflip.h in Headers */,
 				0365430F65D7AE630021806BD7E61B57 /* MP4Atom.h in Headers */,
 				A3F7139E23BEC9DA2D941F67AC777E98 /* NALUnit.h in Headers */,
 				E53B10FF7523EB204DA6DF46B651454C /* VideoEncoder.h in Headers */,
@@ -3540,6 +3538,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6E75340C122150D50C3336033B2CC25 /* AFHTTPRequestOperation.h in Headers */,
+				6C42B7AD1E559DAE00334433 /* KFAPIClient.h in Headers */,
 				A893A517553E71A44CA906B7807C4358 /* AFHTTPRequestOperationManager.h in Headers */,
 				6C469BF61E5323BA0091C393 /* AudioFrameBufferPool.h in Headers */,
 				3AB5D9C39898BE6F799456FAB7E5918D /* AFHTTPSessionManager.h in Headers */,
@@ -3552,6 +3551,7 @@
 				F0D921811AE432028F1ADC677A33EBCC /* AFURLRequestSerialization.h in Headers */,
 				9A30F4D87576CA33B0BC7B982F67E13E /* AFURLResponseSerialization.h in Headers */,
 				F69805747C3AE1C560A7F4455867192C /* AFURLSessionManager.h in Headers */,
+				6C42B7A91E559B8200334433 /* Kickflip.h in Headers */,
 				8903BE6A5309E4A5B12B526E26CD3DBF /* UIActivityIndicatorView+AFNetworking.h in Headers */,
 				BBF3B889957D2483B44490BFD97906B3 /* UIAlertView+AFNetworking.h in Headers */,
 				F2A1BCB468B6DFE52AFB26F9F978F2EB /* UIButton+AFNetworking.h in Headers */,
@@ -4193,6 +4193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C42B7AE1E559DAE00334433 /* KFAPIClient.m in Sources */,
 				BA7E2CF3136FB89422C8310556A9AB4A /* AFHTTPRequestOperation.m in Sources */,
 				4C1473396AAF80D3FA41407AAAA7786C /* AFHTTPRequestOperationManager.m in Sources */,
 				8E463EF9CFEA4FAF8A35761E61426B78 /* AFHTTPSessionManager.m in Sources */,
@@ -4207,6 +4208,7 @@
 				541DA3518B9DEFF71969BF199FEFE1DC /* AFURLSessionManager.m in Sources */,
 				505D4102AD829E5DBA772DAB5B98097C /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				701DB6F144AC4E1402FD1162DFDE2016 /* UIAlertView+AFNetworking.m in Sources */,
+				6C42B7AA1E559B8200334433 /* Kickflip.m in Sources */,
 				F25B0DEEFCF72171B6B22E06F961ABF1 /* UIButton+AFNetworking.m in Sources */,
 				D62E5108269E40E08D2472E095E94CDB /* UIImageView+AFNetworking.m in Sources */,
 				9F4B6632233C9035F6A1011EB1036B41 /* UIProgressView+AFNetworking.m in Sources */,
@@ -4286,7 +4288,6 @@
 			files = (
 				AE8405944B0BAD01B16324C1DD19A1D2 /* AVEncoder.mm in Sources */,
 				BE6B7C48317B8AEA959E692692A2E79E /* KFAACEncoder.mm in Sources */,
-				417980BAE5F119A05B99A3EEAE6E9F0A /* KFAPIClient.m in Sources */,
 				7971F67D755D14FE4C064EB3E0C5F948 /* KFAudioEncoder.m in Sources */,
 				D1E386A6475D45F055A3AD5CB2DF8DA0 /* KFAWSCredentialsProvider.m in Sources */,
 				667647676947B5B6BAFFB5ED94412BE7 /* KFBroadcastViewController.m in Sources */,
@@ -4311,7 +4312,6 @@
 				F6BEA4184F6E17A5598CB89E199527E3 /* KFVideoEncoder.m in Sources */,
 				F0F60297EB538BF60057E27E838D687E /* KFVideoFrame.m in Sources */,
 				BE32B00C0D6AD4CCFB99C79C7902C747 /* Kickflip-dummy.m in Sources */,
-				9E6FCC1A4C6D6D8793FEEE4DCE48CE3F /* Kickflip.m in Sources */,
 				81E0FCA44C52DDF273F22284EE5CFE74 /* MP4Atom.m in Sources */,
 				11C1558ECC1266B21C349122E8B3C7C0 /* NALUnit.cpp in Sources */,
 				958784C4A9696CB3D7DA0CB1F6E50D8C /* VideoEncoder.m in Sources */,
