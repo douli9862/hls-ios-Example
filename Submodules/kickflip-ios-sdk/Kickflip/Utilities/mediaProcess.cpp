@@ -57,7 +57,7 @@ bool getAudioFrameBegin(void *audioPool, unsigned char **inAudioFrame, int *fram
         return false;
     }
     
-    audioFrame_ =  ptAudioPool->front();//frontAudioFrame();
+    audioFrame_ =  ptAudioPool->front();
     if(audioFrame_ == NULL){
         //NSLog(@"audioFrame_ == NULL");
         return false;

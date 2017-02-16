@@ -73,7 +73,21 @@
 - (void) addVideoStreamWithWidth:(int)width height:(int)height {
     _videoStream = [[FFOutputStream alloc] initWithOutputFile:_outputFile outputCodec:@"h264"];
     [_videoStream setupVideoContextWithWidth:width height:height];
-    av_opt_set_int(_outputFile.formatContext->priv_data, "hls_time", _segmentDurationSeconds, 0);
+    int ret = av_opt_set_int(_outputFile.formatContext->priv_data, "hls_time", _segmentDurationSeconds, 0);
+    
+    //ret = av_opt_set_int(_outputFile.formatContext->priv_data, "hls_playlist_type", @"event", 0);
+    
+    NSLog(@"ret:%d", ret);
+    
+    //hls_list_size
+    //ret = av_opt_set_int(_outputFile.formatContext->priv_data, "hls_list_size", 0, 0);
+    
+    NSLog(@"hls_list_size ret:%d", ret);
+    
+    ret = av_opt_set(_outputFile.formatContext->priv_data, "hls_playlist_type", "event", 0);
+
+    NSLog(@"event ret:%d", ret);
+
 }
 
 - (void) addAudioStreamWithSampleRate:(int)sampleRate {

@@ -39,7 +39,7 @@
         AVVideoCompressionPropertiesKey: @{
              AVVideoAverageBitRateKey: @(self.bitrate),
              AVVideoMaxKeyFrameIntervalKey: @(50),//@(150),
-             AVVideoProfileLevelKey: AVVideoProfileLevelH264BaselineAutoLevel,
+             AVVideoProfileLevelKey: AVVideoProfileLevelH264Baseline31,//AVVideoProfileLevelH264BaselineAutoLevel,
              AVVideoAllowFrameReorderingKey: @NO,
              //AVVideoH264EntropyModeKey: AVVideoH264EntropyModeCAVLC,
              //AVVideoExpectedSourceFrameRateKey: @(30),

@@ -98,7 +98,8 @@ NSString const *kFFmpegOutputFormatKey = @"kFFmpegOutputFormatKey";
                                        &newPacket.data, &newPacket.size,
                                        packet->data, packet->size,
                                        packet->flags & AV_PKT_FLAG_KEY);
-    if(a == 0 && newPacket.data != packet->data && newPacket.destruct) {
+    //if(a == 0 && newPacket.data != packet->data && newPacket.destruct) {
+    if(a == 0 && newPacket.data != packet->data ) {
         uint8_t *t = av_malloc(newPacket.size + FF_INPUT_BUFFER_PADDING_SIZE); //the new should be a subset of the old so cannot overflow
         if(t) {
             memcpy(t, newPacket.data, newPacket.size);

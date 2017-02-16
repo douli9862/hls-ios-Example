@@ -75,7 +75,9 @@ static NSString * const kKFS3Key = @"kKFS3Key";
         self.s3 = [AWSS3 S3ForKey:kKFS3Key];
 #endif
         
-        self.manifestGenerator = [[KFHLSManifestGenerator alloc] initWithTargetDuration:10 playlistType:KFHLSManifestPlaylistTypeEvent];
+        //self.manifestGenerator = [[KFHLSManifestGenerator alloc] initWithTargetDuration:10 playlistType:KFHLSManifestPlaylistTypeVOD];
+        
+        self.manifestGenerator = [[KFHLSManifestGenerator alloc] initWithTargetDuration:2 playlistType:KFHLSManifestPlaylistTypeVOD];
     }
     return self;
 }
