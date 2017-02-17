@@ -7,20 +7,23 @@
 //
 
 #import "KFDemoViewController.h"
-#import "Kickflip.h"
+//#import "Kickflip.h"
 //#import "KFAPIClient.h"
 #import "KFLog.h"
-#import "KFUser.h"
+//#import "KFUser.h"
 #import "YapDatabase.h"
 #import "YapDatabaseView.h"
 #import "PureLayout.h"
 #import "KFDateUtils.h"
-#import "KFStreamTableViewCell.h"
+//#import "KFStreamTableViewCell.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "UIActionSheet+Blocks.h"
 #import "VTAcknowledgementsViewController.h"
 #import "KFOnboardingViewController.h"
 #import "KFConstants.h"
+
+
+#import "KFBroadcastViewController.h" //add by tzx
 
 static NSString * const kKFStreamView = @"kKFStreamView";
 static NSString * const kKFStreamsGroup = @"kKFStreamsGroup";
@@ -28,9 +31,9 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
 
 @interface KFDemoViewController ()
 @property (nonatomic, strong, readwrite) UIButton *broadcastButton;
-@property (nonatomic, strong) YapDatabase *database;
+//@property (nonatomic, strong) YapDatabase *database;
 @property (nonatomic, strong) YapDatabaseConnection *uiConnection;
-@property (nonatomic, strong) YapDatabaseConnection *bgConnection;
+//@property (nonatomic, strong) YapDatabaseConnection *bgConnection;
 @property (nonatomic, strong) YapDatabaseViewMappings *mappings;
 @property (nonatomic) NSUInteger currentPage;
 @end
@@ -42,11 +45,19 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
+- (void) presentBroadcasterFromViewController:(UIViewController *)viewController ready:(KFBroadcastReadyBlock)readyBlock completion:(KFBroadcastCompletionBlock)completionBlock {
+    KFBroadcastViewController *broadcastViewController = [[KFBroadcastViewController alloc] init];
+    broadcastViewController.readyBlock = readyBlock;
+    broadcastViewController.completionBlock = completionBlock;
+    [viewController presentViewController:broadcastViewController animated:YES completion:nil];
+}
+
 - (void) broadcastButtonPressed:(id)sender {
-    [Kickflip presentBroadcasterFromViewController:self ready:^(KFStream *stream) {
-        if (stream.streamURL) {
-            DDLogInfo(@"Stream is ready at URL: %@", stream.streamURL);
-        }
+    [self presentBroadcasterFromViewController:self ready:^() {
+        //        if (stream.streamURL) {
+        //            DDLogInfo(@"Stream is ready at URL: %@", stream.streamURL);
+        //        }
     } completion:^(BOOL success, NSError* error){
         if (!success) {
             DDLogError(@"Error setting up stream: %@", error);
@@ -54,6 +65,20 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
             DDLogInfo(@"Done broadcasting");
         }
     }];
+#if 0
+    //[Kickflip presentBroadcasterFromViewController:self ready:^(KFStream *stream) {
+    [Kickflip presentBroadcasterFromViewController:self ready:^() {
+//        if (stream.streamURL) {
+//            DDLogInfo(@"Stream is ready at URL: %@", stream.streamURL);
+//        }
+    } completion:^(BOOL success, NSError* error){
+        if (!success) {
+            DDLogError(@"Error setting up stream: %@", error);
+        } else {
+            DDLogInfo(@"Done broadcasting");
+        }
+    }];
+#endif
 }
 
 - (NSString *) applicationDocumentsDirectory
@@ -63,45 +88,6 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
     return basePath;
 }
 
-#if 0
-
-- (void) setupDatabase {
-    NSString *docs = [self applicationDocumentsDirectory];
-    NSString *dbPath = [docs stringByAppendingPathComponent:@"kickflip.sqlite"];
-    self.database = [[YapDatabase alloc] initWithPath:dbPath];
-    self.uiConnection = [self.database newConnection];
-    self.bgConnection = [self.database newConnection];
-    [self setupDatabaseView];
-}
-
-- (void) setupDatabaseView {
-    YapDatabaseViewSorting *sorting = [YapDatabaseViewSorting withObjectBlock:^NSComparisonResult(NSString *group, NSString *collection1, NSString *key1, id object1, NSString *collection2, NSString *key2, id object2) {
-        if ([group isEqualToString:kKFStreamsGroup]) {
-            KFStream *stream1 = object1;
-            KFStream *stream2 = object2;
-            return [stream2.startDate compare:stream1.startDate];
-        }
-        return NSOrderedSame;
-    }];
-    
-    YapDatabaseViewGrouping *grouping = [YapDatabaseViewGrouping withObjectBlock:^NSString *(NSString *collection, NSString *key, id object) {
-        if ([object isKindOfClass:[KFStream class]]) {
-            KFStream *stream = object;
-            // Hide streams without thumbnails for now
-            if (!stream.thumbnailURL) {
-                return nil;
-            }
-            return kKFStreamsGroup;
-        }
-        return nil; // exclude from view
-    }];
-    
-    YapDatabaseView *databaseView = [[YapDatabaseView alloc] initWithGrouping:grouping sorting:sorting];
-    
-    [self.database registerExtension:databaseView withName:kKFStreamView];
-}
-
-#endif
 
 - (void) setupNavigationBarAppearance {
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -118,7 +104,7 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
     self.streamsTableView = [[UITableView alloc] init];
     self.streamsTableView.dataSource = self;
     self.streamsTableView.delegate = self;
-    [self.streamsTableView registerClass:[KFStreamTableViewCell class] forCellReuseIdentifier:[KFStreamTableViewCell cellIdentifier]];
+//    [self.streamsTableView registerClass:[KFStreamTableViewCell class] forCellReuseIdentifier:[KFStreamTableViewCell cellIdentifier]];
     [self.view addSubview:self.streamsTableView];
     self.streamsTableView.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutConstraint *constraint = [self.streamsTableView autoPinToTopLayoutGuideOfViewController:self withInset:0.0f];
@@ -164,6 +150,48 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
     [self setupTableView];
     //[self setupPullToRefresh];
 }
+
+
+#if 0
+
+- (void) setupDatabase {
+    NSString *docs = [self applicationDocumentsDirectory];
+    NSString *dbPath = [docs stringByAppendingPathComponent:@"kickflip.sqlite"];
+    self.database = [[YapDatabase alloc] initWithPath:dbPath];
+    self.uiConnection = [self.database newConnection];
+    self.bgConnection = [self.database newConnection];
+    [self setupDatabaseView];
+}
+
+- (void) setupDatabaseView {
+    YapDatabaseViewSorting *sorting = [YapDatabaseViewSorting withObjectBlock:^NSComparisonResult(NSString *group, NSString *collection1, NSString *key1, id object1, NSString *collection2, NSString *key2, id object2) {
+        if ([group isEqualToString:kKFStreamsGroup]) {
+            KFStream *stream1 = object1;
+            KFStream *stream2 = object2;
+            return [stream2.startDate compare:stream1.startDate];
+        }
+        return NSOrderedSame;
+    }];
+    
+    YapDatabaseViewGrouping *grouping = [YapDatabaseViewGrouping withObjectBlock:^NSString *(NSString *collection, NSString *key, id object) {
+        if ([object isKindOfClass:[KFStream class]]) {
+            KFStream *stream = object;
+            // Hide streams without thumbnails for now
+            if (!stream.thumbnailURL) {
+                return nil;
+            }
+            return kKFStreamsGroup;
+        }
+        return nil; // exclude from view
+    }];
+    
+    YapDatabaseView *databaseView = [[YapDatabaseView alloc] initWithGrouping:grouping sorting:sorting];
+    
+    [self.database registerExtension:databaseView withName:kKFStreamView];
+}
+
+#endif
+
 
 #if 0
 - (void) setupViewMappings {
@@ -241,6 +269,8 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
     // Dispose of any resources that can be recreated.
 }
 
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)sender
 {
     return [self.mappings numberOfSections];
@@ -251,6 +281,8 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
     return [self.mappings numberOfItemsInSection:section];
 }
 
+#if 0
+
 - (CGFloat) tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [KFStreamTableViewCell defaultHeight];
 }
@@ -258,6 +290,8 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [KFStreamTableViewCell defaultHeight];
 }
+
+
 
 - (UITableViewCell *)tableView:(UITableView *)sender cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -300,6 +334,8 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
     }];
     return cell;
 }
+
+#endif
 
 - (void)yapDatabaseModified:(NSNotification *)notification
 {
@@ -394,12 +430,13 @@ static NSString * const kKFStreamsCollection = @"kKFStreamsCollection";
 
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    __block KFStream *stream = nil;
-    [self.uiConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
-        stream = [[transaction extension:kKFStreamView] objectAtIndexPath:indexPath withMappings:self.mappings];
-    }];
+//    __block KFStream *stream = nil;
+//    [self.uiConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
+//        stream = [[transaction extension:kKFStreamView] objectAtIndexPath:indexPath withMappings:self.mappings];
+//    }];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    MPMoviePlayerViewController *movieView = [[MPMoviePlayerViewController alloc] initWithContentURL:stream.streamURL];
+//    MPMoviePlayerViewController *movieView = [[MPMoviePlayerViewController alloc] initWithContentURL:stream.streamURL];
+    MPMoviePlayerViewController *movieView = [[MPMoviePlayerViewController alloc] initWithContentURL:nil];
     [self presentViewController:movieView animated:YES completion:nil];
 }
 

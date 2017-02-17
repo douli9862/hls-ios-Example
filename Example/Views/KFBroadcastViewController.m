@@ -9,7 +9,7 @@
 #import "KFBroadcastViewController.h"
 #import "KFRecorder.h"
 //#import "KFAPIClient.h"
-#import "KFUser.h"
+//#import "KFUser.h"
 #import "KFLog.h"
 #import "PureLayout.h"
 
@@ -17,6 +17,7 @@
 
 - (id) init {
     if (self = [super init]) {
+        //self.recorder = [[KFRecorder alloc] init];
         self.recorder = [[KFRecorder alloc] init];
         self.recorder.delegate = self;
     }
@@ -112,7 +113,9 @@
 }
 
 - (void) shareButtonPressed:(id)sender {
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.recorder.stream.kickflipURL] applicationActivities:nil];
+//    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.recorder.stream.kickflipURL] applicationActivities:nil];
+    
+       UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@"" applicationActivities:nil];
     
     UIActivityViewControllerCompletionHandler completionHandler = ^(NSString *activityType, BOOL completed) {
         NSLog(@"share activity: %@", activityType);

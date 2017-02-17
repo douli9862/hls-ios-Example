@@ -11,12 +11,13 @@
 
 @implementation KFAWSCredentialsProvider
 
-- (instancetype)initWithStream:(KFS3Stream*)stream {
+//- (instancetype)initWithStream:(KFS3Stream*)stream {
+- (instancetype)initWithStream {
     if (self = [super init]) {
-        _accessKey = stream.awsAccessKey;
-        _secretKey = stream.awsSecretKey;
-        _sessionKey = stream.awsSessionToken;
-        _expiration = stream.awsExpirationDate;
+//        _accessKey = stream.awsAccessKey;
+//        _secretKey = stream.awsSecretKey;
+//        _sessionKey = stream.awsSessionToken;
+//        _expiration = stream.awsExpirationDate;
     }
     return self;
 }

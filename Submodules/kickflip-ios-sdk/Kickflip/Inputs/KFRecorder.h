@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "KFAACEncoder.h"
 #import "KFH264Encoder.h"
-#import "KFHLSUploader.h"
+//#import "KFHLSUploader.h"
 #import <CoreLocation/CoreLocation.h>
 
 @class KFRecorder, KFHLSWriter, KFStream;
@@ -25,7 +25,9 @@
 /**
  *  KFRecorder manages the majority of the AV pipeline
  */
-@interface KFRecorder : NSObject <AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate, KFEncoderDelegate, KFHLSUploaderDelegate, CLLocationManagerDelegate>
+//@interface KFRecorder : NSObject <AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate, KFEncoderDelegate, KFHLSUploaderDelegate, CLLocationManagerDelegate>
+
+@interface KFRecorder : NSObject <AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate, KFEncoderDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) AVCaptureSession* session;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer* previewLayer;
@@ -50,7 +52,27 @@
 
 @property (nonatomic, weak) id<KFRecorderDelegate> delegate;
 
+- (id) init;
+- (id) initWithMaxbitrate:(int)bitrate;
+
 - (void) startRecording;
 - (void) stopRecording;
 
+
+
+
 @end
+
+
+#if 0
+@interface KFRecorderNode : NSObject
+@property (nonatomic, assign) CGSize exportSize;
+@property (nonatomic, strong) NSString *hlsPath;
+
+- (void)startSession;
+- (void)encodeAudioWithASBD:(AudioStreamBasicDescription)asbd time:(const AudioTimeStamp *)time numberOfFrames:(UInt32)frames buffer:(AudioBufferList *)audio;
+- (void)encodeVideoWithPixelBuffer:(CVPixelBufferRef)buffer time:(CMTime)time;
+- (void)endSession;
+
+@end
+#endif

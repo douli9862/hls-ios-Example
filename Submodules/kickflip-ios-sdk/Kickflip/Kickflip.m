@@ -8,7 +8,7 @@
 
 #import "Kickflip.h"
 #import "KFLog.h"
-#import "KFBroadcastViewController.h"
+//#import "KFBroadcastViewController.h"
 
 @interface Kickflip()
 //@property (nonatomic, copy) NSString *apiKey;
@@ -22,10 +22,10 @@ static Kickflip *_kickflip = nil;
 @implementation Kickflip
 
 + (void) presentBroadcasterFromViewController:(UIViewController *)viewController ready:(KFBroadcastReadyBlock)readyBlock completion:(KFBroadcastCompletionBlock)completionBlock {
-    KFBroadcastViewController *broadcastViewController = [[KFBroadcastViewController alloc] init];
-    broadcastViewController.readyBlock = readyBlock;
-    broadcastViewController.completionBlock = completionBlock;
-    [viewController presentViewController:broadcastViewController animated:YES completion:nil];
+//    KFBroadcastViewController *broadcastViewController = [[KFBroadcastViewController alloc] init];
+//    broadcastViewController.readyBlock = readyBlock;
+//    broadcastViewController.completionBlock = completionBlock;
+//    [viewController presentViewController:broadcastViewController animated:YES completion:nil];
 }
 
 + (Kickflip*) sharedInstance {

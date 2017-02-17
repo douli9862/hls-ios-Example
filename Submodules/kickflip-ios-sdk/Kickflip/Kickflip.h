@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 //#import "KFAPIClient.h"
 //#import "KFUser.h"
-#import "KFStream.h"
+//#import "KFStream.h"
 
 /**
  *  Block executed when stream is ready.
@@ -18,7 +18,7 @@
  *  @param streamURL URL to the streamable m3u8
  *  @see presentBroadcasterFromViewController:ready:completion:
  */
-typedef void (^KFBroadcastReadyBlock)(KFStream *stream);
+typedef void (^KFBroadcastReadyBlock)(); //(KFStream *stream);
 
 /**
  *  Block executed when completed live broadcast
@@ -44,7 +44,7 @@ typedef void (^KFBroadcastCompletionBlock)(BOOL success, NSError* error);
  *  @param key    API key from kickflip.io
  *  @param secret API secret from kickflip.io
  */
-+ (void) setupWithAPIKey:(NSString*)key secret:(NSString*)secret;
+//+ (void) setupWithAPIKey:(NSString*)key secret:(NSString*)secret;
 
 /**
  *  Returns the active API key.
@@ -52,14 +52,14 @@ typedef void (^KFBroadcastCompletionBlock)(BOOL success, NSError* error);
  *  @return API key from kickflip.io
  *  @see setupWithAPIKey:secret:
  */
-+ (NSString*) apiKey;
+//+ (NSString*) apiKey;
 /**
  *  Returns the active API secret
  *
  *  @return API secret from kickflip.io
  *  @see setupWithAPIKey:secret:
  */
-+ (NSString*) apiSecret;
+//+ (NSString*) apiSecret;
 
 ///-------------------------------
 /// @name Broadcast

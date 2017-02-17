@@ -8,7 +8,7 @@
 
 #import "KFAppDelegate.h"
 #import "KFDemoViewController.h"
-#import "Kickflip.h"
+//#import "Kickflip.h"
 #import "KFSecrets.h"
 #import "KFLog.h"
 #import "DDTTYLogger.h"
@@ -23,7 +23,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     //[Kickflip setupWithAPIKey:KICKFLIP_API_KEY secret:KICKFLIP_API_SECRET]; //del by tzx
-    [Kickflip setMaxBitrate:2000*1000]; // 2 Mbps
+    //[Kickflip setMaxBitrate:2000*1000]; // 2 Mbps
     
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     

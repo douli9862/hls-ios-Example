@@ -7,7 +7,7 @@
 //
 
 #import "KFStreamTableViewCell.h"
-#import "KFStream.h"
+//#import "KFStream.h"
 #import "PureLayout.h"
 #import "KFDateUtils.h"
 #import "UIImageView+WebCache.h"
@@ -123,6 +123,8 @@ static NSString * const KFStreamTableViewCellIdentifier = @"KFStreamTableViewCel
     [self.thumbnailImageView autoSetDimension:ALDimensionHeight toSize:180];
 }
 
+#if 0
+
 - (void) setStream:(KFStream *)stream {
     self.dateLabel.text = [[KFDateUtils localizedDateFormatter] stringFromDate:stream.startDate];
     self.locationLabel.text = stream.city;
@@ -149,6 +151,7 @@ static NSString * const KFStreamTableViewCellIdentifier = @"KFStreamTableViewCel
         }];
     }];
 }
+#endif
 
 - (void) prepareForReuse {
     [super prepareForReuse];

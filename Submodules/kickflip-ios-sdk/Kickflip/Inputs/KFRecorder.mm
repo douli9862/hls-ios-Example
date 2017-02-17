@@ -9,15 +9,15 @@
 #import "KFRecorder.h"
 #import "KFAACEncoder.h"
 #import "KFH264Encoder.h"
-#import "KFHLSMonitor.h"
+//#import "KFHLSMonitor.h"
 #import "KFH264Encoder.h"
 #import "KFHLSWriter.h"
 #import "KFLog.h"
-#import "KFAPIClient.h"
-#import "KFS3Stream.h"
+//#import "KFAPIClient.h"
+//#import "KFS3Stream.h"
 #import "KFFrame.h"
 #import "KFVideoFrame.h"
-#import "Kickflip.h"
+//#import "Kickflip.h"
 #import "Endian.h"
 
 #include "../Utilities/mediaProcess.h"
@@ -70,7 +70,18 @@ static int64_t GetNowUs() {
     if (self = [super init]) {
         _minBitrate = 300 * 1000;
         [self setupSession];
-        [self setupEncoders];
+        [self setupEncoders:2000000];
+    }
+    
+    bool bRet = ::createAudioPool(&mAudioPool, 2048, 20);
+    return self;
+}
+
+- (id) initWithMaxbitrate:(int)bitrate {
+    if (self = [super init]) {
+        _minBitrate = 300 * 1000;
+        [self setupSession];
+        [self setupEncoders:bitrate];
     }
     
     bool bRet = ::createAudioPool(&mAudioPool, 2048, 20);
@@ -221,11 +232,13 @@ static OSStatus handleInputBuffer(void *inRefCon,
     return nil;
 }
 
-- (void) setupHLSWriterWithEndpoint:(KFS3Stream*)endpoint {
+//- (void) setupHLSWriterWithEndpoint:(KFS3Stream*)endpoint {
+- (void) setupHLSWriterWithEndpoint:(NSString *)streamID {
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-    NSString *folderName = [NSString stringWithFormat:@"%@.hls", endpoint.streamID];
+    //NSString *folderName = [NSString stringWithFormat:@"%@.hls", endpoint.streamID];
+    NSString *folderName = [NSString stringWithFormat:@"%@.hls", streamID];
     NSString *hlsDirectoryPath = [basePath stringByAppendingPathComponent:folderName];
     [[NSFileManager defaultManager] createDirectoryAtPath:hlsDirectoryPath withIntermediateDirectories:YES attributes:nil error:nil];
     self.hlsWriter = [[KFHLSWriter alloc] initWithDirectoryPath:hlsDirectoryPath];
@@ -234,12 +247,12 @@ static OSStatus handleInputBuffer(void *inRefCon,
 
 }
 
-- (void) setupEncoders {
+- (void) setupEncoders:(int)bitrate {
     self.audioSampleRate = 44100;
     self.videoHeight = 720;
     self.videoWidth = 1280;
     int audioBitrate = 64 * 1000; // 64 Kbps
-    int maxBitrate = [Kickflip maxBitrate];
+    int maxBitrate = bitrate;//[Kickflip maxBitrate];
     int videoBitrate = maxBitrate - audioBitrate;
     _h264Encoder = [[KFH264Encoder alloc] initWithBitrate:videoBitrate width:self.videoWidth height:self.videoHeight];
     _h264Encoder.delegate = self;
@@ -480,11 +493,9 @@ static OSStatus handleInputBuffer(void *inRefCon,
 }
 
 - (void) startRecording {
-#if 1
+    [self setupHLSWriterWithEndpoint:@"hls-out"];
     
-    [self setupHLSWriterWithEndpoint:nil];
-    
-    [[KFHLSMonitor sharedMonitor] startMonitoringFolderPath:_hlsWriter.directoryPath endpoint:nil delegate:self];
+   // [[KFHLSMonitor sharedMonitor] startMonitoringFolderPath:_hlsWriter.directoryPath endpoint:nil delegate:self];
     
     NSError *error = nil;
     [_hlsWriter prepareForWriting:&error];
@@ -497,45 +508,6 @@ static OSStatus handleInputBuffer(void *inRefCon,
             [self.delegate recorderDidStartRecording:self error:nil];
         });
     }
-#else
-    
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    [self.locationManager startUpdatingLocation];
-    [[KFAPIClient sharedClient] startNewStream:^(KFStream *endpointResponse, NSError *error) {
-//del by tzx
-//        if (error) {
-//            if (self.delegate && [self.delegate respondsToSelector:@selector(recorderDidStartRecording:error:)]) {
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    [self.delegate recorderDidStartRecording:self error:error];
-//                });
-//            }
-//            return;
-//        }
-        self.stream = endpointResponse;
-        [self setStreamStartLocation];
-       // if ([endpointResponse isKindOfClass:[KFS3Stream class]]) { //del by tzx
-        {
-            KFS3Stream *s3Endpoint = (KFS3Stream*)endpointResponse;
-            s3Endpoint.streamState = KFStreamStateStreaming;
-            [self setupHLSWriterWithEndpoint:s3Endpoint];
-            
-            [[KFHLSMonitor sharedMonitor] startMonitoringFolderPath:_hlsWriter.directoryPath endpoint:s3Endpoint delegate:self];
-            
-            NSError *error = nil;
-            [_hlsWriter prepareForWriting:&error];
-            if (error) {
-                DDLogError(@"Error preparing for writing: %@", error);
-            }
-            self.isRecording = YES;
-            if (self.delegate && [self.delegate respondsToSelector:@selector(recorderDidStartRecording:error:)]) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.delegate recorderDidStartRecording:self error:nil];
-                });
-            }
-        }
-    }];
-#endif
 }
 
 
@@ -583,12 +555,12 @@ static OSStatus handleInputBuffer(void *inRefCon,
     [self.locationManager stopUpdatingLocation];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if (self.lastLocation) {
-            self.stream.endLocation = self.lastLocation;
-            [[KFAPIClient sharedClient] updateMetadataForStream:self.stream callbackBlock:^(KFStream *updatedStream, NSError *error) {
-                if (error) {
-                    DDLogError(@"Error updating stream endLocation: %@", error);
-                }
-            }];
+//            self.stream.endLocation = self.lastLocation;
+//            [[KFAPIClient sharedClient] updateMetadataForStream:self.stream callbackBlock:^(KFStream *updatedStream, NSError *error) {
+//                if (error) {
+//                    DDLogError(@"Error updating stream endLocation: %@", error);
+//                }
+//            }];
         }
         [_session stopRunning];
         self.isRecording = NO;
@@ -650,11 +622,11 @@ static OSStatus handleInputBuffer(void *inRefCon,
     }
     if (self.stream && !self.stream.startLocation) {
         self.stream.startLocation = self.lastLocation;
-        [[KFAPIClient sharedClient] updateMetadataForStream:self.stream callbackBlock:^(KFStream *updatedStream, NSError *error) {
-            if (error) {
-                DDLogError(@"Error updating stream startLocation: %@", error);
-            }
-        }];
+//        [[KFAPIClient sharedClient] updateMetadataForStream:self.stream callbackBlock:^(KFStream *updatedStream, NSError *error) {
+//            if (error) {
+//                DDLogError(@"Error updating stream startLocation: %@", error);
+//            }
+//        }];
         [self reverseGeocodeStream:self.stream];
     }
 }
