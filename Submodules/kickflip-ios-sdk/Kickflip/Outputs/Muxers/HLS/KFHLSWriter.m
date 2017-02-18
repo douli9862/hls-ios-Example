@@ -146,7 +146,7 @@
         //DDLogInfo(@"*** Scaled PTS: %lld", scaledPTS);
         
         if(streamIndex == 0){
-            NSLog(@"\n scaledPTS :%lld, orgPts:%lld\n", scaledPTS, originalPTS/1000000 + beginTimeVale);
+            //NSLog(@"\n scaledPTS :%lld, orgPts:%lld\n", scaledPTS, originalPTS/1000000 + beginTimeVale);
         }
         
         _packet->pts = scaledPTS;

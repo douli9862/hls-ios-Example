@@ -65,6 +65,8 @@
 
 -(BOOL)intputVidoFrame:(CMSampleBufferRef)videoSample;
 
+-(BOOL)intputPixelBufferRef:(CVPixelBufferRef)pixelbufferRef;
+
 
 @end
 

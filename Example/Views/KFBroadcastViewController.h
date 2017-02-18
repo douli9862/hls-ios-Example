@@ -35,7 +35,15 @@ typedef void (^KFBroadcastCompletionBlock)(BOOL success, NSError* error);
  *
  *  You can also use the Kickflip class to show this view from any UIViewController.
  */
-@interface KFBroadcastViewController : UIViewController <KFRecorderDelegate>
+@interface KFBroadcastViewController : UIViewController <KFRecorderDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate>
+
+
+
+@property (nonatomic) double minBitrate;
+@property (nonatomic) BOOL hasScreenshot;
+@property (nonatomic, strong) CLLocationManager *locationManager;
+
+
 
 @property (nonatomic, copy) KFBroadcastReadyBlock readyBlock;
 @property (nonatomic, copy) KFBroadcastCompletionBlock completionBlock;
@@ -45,11 +53,22 @@ typedef void (^KFBroadcastCompletionBlock)(BOOL success, NSError* error);
 @property (nonatomic, strong) KFRecordButton *recordButton;
 @property (nonatomic, strong) UIImageView *liveBanner;
 
-@property (nonatomic, strong) KFRecorder *recorder;
+//@property (nonatomic, strong) KFRecorder *recorder;
+//@property (nonatomic, strong) KFRecorderNode *recorder;
 @property (nonatomic, strong) NSURL *shareURL;
 
 @property (nonatomic, strong) UILabel *rotationLabel;
 @property (nonatomic, strong) UIImageView *rotationImageView;
 @property (nonatomic, strong) UIButton *cancelButton;
+
+
+@property (nonatomic, strong) AVCaptureSession* session;
+@property (nonatomic, strong) AVCaptureVideoPreviewLayer* previewLayer;
+@property (nonatomic, strong) AVCaptureVideoDataOutput* videoOutput;
+@property (nonatomic, strong) AVCaptureAudioDataOutput* audioOutput;
+@property (nonatomic, strong) dispatch_queue_t videoQueue;
+@property (nonatomic, strong) dispatch_queue_t audioQueue;
+@property (nonatomic, strong) AVCaptureConnection* audioConnection;
+@property (nonatomic, strong) AVCaptureConnection* videoConnection;
 
 @end

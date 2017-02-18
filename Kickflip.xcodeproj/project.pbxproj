@@ -22,7 +22,7 @@
 
 /* Begin PBXBuildFile section */
 		6C3348241E4C5AC8005FF3B3 /* Pods-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C3348231E4C5AC8005FF3B3 /* Pods-acknowledgements.plist */; };
-		6C42B7B81E56F00C00334433 /* KFBroadcastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C42B7B11E56F00C00334433 /* KFBroadcastViewController.m */; };
+		6C42B7B81E56F00C00334433 /* KFBroadcastViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C42B7B11E56F00C00334433 /* KFBroadcastViewController.mm */; };
 		6C42B7B91E56F00C00334433 /* KFLiveBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C42B7B31E56F00C00334433 /* KFLiveBannerView.m */; };
 		6C42B7BA1E56F00C00334433 /* KFRecordButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C42B7B51E56F00C00334433 /* KFRecordButton.m */; };
 		6C42B7BB1E56F00C00334433 /* KFStreamTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C42B7B71E56F00C00334433 /* KFStreamTableViewCell.m */; };
@@ -53,7 +53,7 @@
 		379C515284C57E5A594592B3 /* Pods-Kickflip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kickflip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kickflip/Pods-Kickflip.debug.xcconfig"; sourceTree = "<group>"; };
 		6C3348231E4C5AC8005FF3B3 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
 		6C42B7B01E56F00C00334433 /* KFBroadcastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KFBroadcastViewController.h; path = Views/KFBroadcastViewController.h; sourceTree = "<group>"; };
-		6C42B7B11E56F00C00334433 /* KFBroadcastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KFBroadcastViewController.m; path = Views/KFBroadcastViewController.m; sourceTree = "<group>"; };
+		6C42B7B11E56F00C00334433 /* KFBroadcastViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = KFBroadcastViewController.mm; path = Views/KFBroadcastViewController.mm; sourceTree = "<group>"; };
 		6C42B7B21E56F00C00334433 /* KFLiveBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KFLiveBannerView.h; path = Views/KFLiveBannerView.h; sourceTree = "<group>"; };
 		6C42B7B31E56F00C00334433 /* KFLiveBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KFLiveBannerView.m; path = Views/KFLiveBannerView.m; sourceTree = "<group>"; };
 		6C42B7B41E56F00C00334433 /* KFRecordButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KFRecordButton.h; path = Views/KFRecordButton.h; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				6C42B7B01E56F00C00334433 /* KFBroadcastViewController.h */,
-				6C42B7B11E56F00C00334433 /* KFBroadcastViewController.m */,
+				6C42B7B11E56F00C00334433 /* KFBroadcastViewController.mm */,
 				6C42B7B21E56F00C00334433 /* KFLiveBannerView.h */,
 				6C42B7B31E56F00C00334433 /* KFLiveBannerView.m */,
 				6C42B7B41E56F00C00334433 /* KFRecordButton.h */,
@@ -333,7 +333,7 @@
 			files = (
 				D945ADDB189854000026F697 /* main.m in Sources */,
 				6C42B7BB1E56F00C00334433 /* KFStreamTableViewCell.m in Sources */,
-				6C42B7B81E56F00C00334433 /* KFBroadcastViewController.m in Sources */,
+				6C42B7B81E56F00C00334433 /* KFBroadcastViewController.mm in Sources */,
 				D9FFDAB8194BC7B300D76CFF /* KFConstants.m in Sources */,
 				6C42B7B91E56F00C00334433 /* KFLiveBannerView.m in Sources */,
 				D945AF411898635A0026F697 /* KFDemoViewController.m in Sources */,

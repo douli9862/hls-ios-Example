@@ -23,7 +23,7 @@
 #include "../Utilities/mediaProcess.h"
 
 
-#define   __ENABLE_SDK_CAPTURE_AUIDO_VIDEO__ 1
+//#define   __ENABLE_SDK_CAPTURE_AUIDO_VIDEO__
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v) \
 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -69,16 +69,16 @@ static int64_t GetNowUs() {
 }
 
 
-//- (void) setupEncoders:(int)videoBitrate withSize:(CGSize)videoSize withAudio:(int) audioBitrate withAudioSampleRate:(NSUInteger)audioSampleRate
-
 - (id) init {
     if (self = [super init]) {
         _minBitrate = 300 * 1000;
+#ifdef __ENABLE_SDK_CAPTURE_AUIDO_VIDEO__
         [self setupSession];
+#endif
         [self setupEncoders];
+        bool bRet = ::createAudioPool(&mAudioPool, 2048, 5);
     }
     
-    bool bRet = ::createAudioPool(&mAudioPool, 2048, 20);
     return self;
 }
 
@@ -86,13 +86,38 @@ static int64_t GetNowUs() {
                      withSize:(CGSize)videoSize
           withAudioSampleRate:(NSUInteger)audioSampleRate{
     if (self = [super init]) {
+        _minBitrate = 300 * 1000;
+#ifdef __ENABLE_SDK_CAPTURE_AUIDO_VIDEO__
         [self setupSession];
-        [self setupEncoders:videoBirate withSize:videoSize
-            withAudioSampleRate:audioSampleRate];
+#endif
+        [self setupEncoders:videoBirate withSize:videoSize withAudioSampleRate:audioSampleRate];
+        
+        bool bRet = ::createAudioPool(&mAudioPool, 2048, 5);
+        if(!bRet){
+            bRet = ::createAudioPool(&mAudioPool, 2048, 5);
+            if(!bRet){
+                return nil;
+            }
+        }
     }
     
-    bool bRet = ::createAudioPool(&mAudioPool, 2048, 20);
     return self;
+}
+
+-(BOOL)intputPixelBufferRef:(CVPixelBufferRef)pixelbufferRef
+{
+    if (!_isRecording) {
+        return false;
+    }
+    
+    CMSampleBufferRef sampleBuf = [self PixelBufferRefToCSamplebuffer:pixelbufferRef];
+    
+   // [self intputVidoFrame:sampleBuf];
+    [_h264Encoder encodeSampleBuffer:sampleBuf];
+    
+    CFRelease(sampleBuf);
+    
+    return true;
 }
 
 -(BOOL)intputVidoFrame:(CMSampleBufferRef)videoSample
@@ -101,15 +126,16 @@ static int64_t GetNowUs() {
         return false;
     }
     
-    CMSampleBufferRef sampleBuf = [self adjustTime:videoSample withUs:GetNowUs()];
-    CMTime pts = CMSampleBufferGetPresentationTimeStamp(sampleBuf);
+//    CMSampleBufferRef sampleBuf = [self adjustTime:videoSample withUs:GetNowUs()];
+//    CMTime pts = CMSampleBufferGetPresentationTimeStamp(sampleBuf);
     
-    [_h264Encoder encodeSampleBuffer:sampleBuf];
+    [_h264Encoder encodeSampleBuffer:videoSample];
     
-    CFRelease(sampleBuf);
+    //CFRelease(sampleBuf);
     
     return true;
 }
+
 
 -(BOOL)inputAudioFrame:(AudioStreamBasicDescription)asbd time:(const AudioTimeStamp *)time numberOfFrames:(UInt32)frames buffer:(AudioBufferList *)audio
 {
@@ -117,20 +143,40 @@ static int64_t GetNowUs() {
         return false;
     }
     
-    CMSampleBufferRef buff = NULL;
-    CMFormatDescriptionRef format = NULL;
-    OSStatus status = CMAudioFormatDescriptionCreate(kCFAllocatorDefault, &asbd, 0, NULL, 0, NULL, NULL, &format);
-    if (status) {
+    ::pushAudioFrame(mAudioPool, (uint8_t*)audio->mBuffers[0].mData, audio->mBuffers[0].mDataByteSize);
+
+    unsigned char * pData = NULL;
+    int frameSize = 0;
+    bool bRet =::getAudioFrameBegin(mAudioPool, &pData, &frameSize);
+    if(bRet == false){
         return false;
     }
     
-    int64_t timeVale = GetNowUs();
-    CMSampleTimingInfo timing = { CMTimeMake(1, asbd.mSampleRate), kCMTimeZero, kCMTimeInvalid };
+    audio->mBuffers[0].mData = pData;
+    audio->mBuffers[0].mDataByteSize = frameSize;
     
-    status = CMSampleBufferCreate(kCFAllocatorDefault, NULL, false, NULL, NULL, format, (CMItemCount)1024, 1, &timing, 0, NULL, &buff);
-    if (status) { //失败
-        return status;
+    
+    CMSampleBufferRef audioSample = [self AudioBufferListToCSamplebuffer:audio withASBD:asbd];
+    
+    if (audioSample) {
+        [self inputCallback:audioSample];
+        CFRelease(audioSample);
     }
+
+    ::getAudioFrameEnd(mAudioPool);
+    
+    return true;
+    
+}
+
+-(BOOL)inputAudioFrameEX:(AudioStreamBasicDescription)asbd time:(const AudioTimeStamp *)time numberOfFrames:(UInt32)frames buffer:(AudioBufferList *)audio
+{
+    if (!_isRecording) {
+        return false;
+    }
+    
+    //int64_t timeVale = GetNowUs();
+    //CMSampleTimingInfo timing = { CMTimeMake(1, asbd.mSampleRate), kCMTimeZero, kCMTimeInvalid };
     
     ::pushAudioFrame(mAudioPool, (uint8_t*)audio->mBuffers[0].mData, audio->mBuffers[0].mDataByteSize);
         
@@ -143,6 +189,21 @@ static int64_t GetNowUs() {
     
     audio->mBuffers[0].mData = pData;
     audio->mBuffers[0].mDataByteSize = frameSize;
+    
+    CMTime pts = CMTimeMake(GetNowUs(), 1000000000);
+    
+    CMSampleTimingInfo timing = { CMTimeMake(1, asbd.mSampleRate), pts, pts};
+    CMSampleBufferRef buff = NULL;
+    CMFormatDescriptionRef format = NULL;
+    OSStatus status = CMAudioFormatDescriptionCreate(kCFAllocatorDefault, &asbd, 0, NULL, 0, NULL, NULL, &format);
+    if (status) {
+        return false;
+    }
+    
+    status = CMSampleBufferCreate(kCFAllocatorDefault, NULL, false, NULL, NULL, format, (CMItemCount)1024, 1, &timing, 0, NULL, &buff);
+    if (status) { //失败
+        return status;
+    }
     
     //NSLog(@"buffers.mBuffers[0].mDataByteSize:%d",buffers.mBuffers[0].mDataByteSize);
     status = CMSampleBufferSetDataBufferFromAudioBufferList(buff, kCFAllocatorDefault, kCFAllocatorDefault, 0, audio);
@@ -184,22 +245,70 @@ static int64_t GetNowUs() {
 }
 
 - (void) setupEncoders:(int)videoBitrate withSize:(CGSize)videoSize  withAudioSampleRate:(NSUInteger)audioSampleRate {
-//    self.audioSampleRate = 44100;
-//    self.videoHeight = 720;
-//    self.videoWidth = 1280;
+    self.audioSampleRate = audioSampleRate;
     
     self.videoHeight = videoSize.height;
     self.videoWidth = videoSize.width;
     
     int audioBitrate = 64 * 1000; // 64 Kbps
-    //int maxBitrate = bitrate;//[Kickflip maxBitrate];
-    //int videoBitrate = maxBitrate - audioBitrate;
-    _h264Encoder = [[KFH264Encoder alloc] initWithBitrate:videoBitrate width:self.videoWidth height:self.videoHeight];
+    int maxBitrate = videoBitrate;//[Kickflip maxBitrate];
+    int videoBit = maxBitrate - audioBitrate;
+    _h264Encoder = [[KFH264Encoder alloc] initWithBitrate:videoBit width:self.videoWidth height:self.videoHeight];
     _h264Encoder.delegate = self;
     
-    _aacEncoder = [[KFAACEncoder alloc] initWithBitrate:audioBitrate sampleRate:self.audioSampleRate channels:1];
+    _aacEncoder = [[KFAACEncoder alloc] initWithBitrate:audioBitrate sampleRate:audioSampleRate channels:1];
     _aacEncoder.delegate = self;
     _aacEncoder.addADTSHeader = YES;
+}
+
+
+-(CMSampleBufferRef)PixelBufferRefToCSamplebuffer:(CVPixelBufferRef) pixelBufferRef
+{
+    OSStatus result = 0;
+    CVPixelBufferLockBaseAddress(pixelBufferRef,kCVPixelBufferLock_ReadOnly);
+    CMSampleBufferRef newSampleBuffer = NULL;
+    CMTime pts = CMTimeMake(GetNowUs(), 1000000000);
+    CMSampleTimingInfo timimgInfo = { CMTimeMake(1, 25), pts, pts };
+    
+    CMVideoFormatDescriptionRef videoInfo = NULL;
+    
+    result = CMVideoFormatDescriptionCreateForImageBuffer(NULL, pixelBufferRef, &videoInfo);
+    if(result != 0){
+        return nil;
+    }
+    
+    result = CMSampleBufferCreateForImageBuffer(kCFAllocatorDefault, pixelBufferRef, true, NULL, NULL, videoInfo, &timimgInfo, &newSampleBuffer);
+    if(result != 0){
+       return nil;
+    }
+    CVPixelBufferUnlockBaseAddress(pixelBufferRef,kCVPixelBufferLock_ReadOnly);
+    
+    return newSampleBuffer;
+}
+
+
+-(CMSampleBufferRef)AudioBufferListToCSamplebuffer:(AudioBufferList*) audioBuffer withASBD:(AudioStreamBasicDescription)asbd
+{
+    OSStatus result = 0;
+    CMSampleBufferRef newSampleBuffer = NULL;
+    CMTime pts = CMTimeMake(GetNowUs(), 1000000000);
+    
+    CMSampleTimingInfo timing = { CMTimeMake(1, asbd.mSampleRate), pts, pts};
+    CMFormatDescriptionRef format = NULL;
+    OSStatus status = CMAudioFormatDescriptionCreate(kCFAllocatorDefault, &asbd, 0, NULL, 0, NULL, NULL, &format);
+    if (0 != status) {
+        return nil;
+    }
+    
+    status = CMSampleBufferCreate(kCFAllocatorDefault, NULL, false, NULL, NULL, format, (CMItemCount)1024, 1, &timing, 0, NULL, &newSampleBuffer);
+    if (0 != status) {
+        return nil;
+    }
+    
+    //NSLog(@"buffers.mBuffers[0].mDataByteSize:%d",buffers.mBuffers[0].mDataByteSize);
+    status = CMSampleBufferSetDataBufferFromAudioBufferList(newSampleBuffer, kCFAllocatorDefault, kCFAllocatorDefault, 0, audioBuffer);
+    
+    return newSampleBuffer;
 }
 
 
