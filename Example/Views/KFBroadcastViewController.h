@@ -12,6 +12,23 @@
 #import "KFRecordButton.h"
 
 /**
+ *  Block executed when stream is ready.
+ *
+ *  @param streamURL URL to the streamable m3u8
+ *  @see presentBroadcasterFromViewController:ready:completion:
+ */
+typedef void (^KFBroadcastReadyBlock)(); //(KFStream *stream);
+
+/**
+ *  Block executed when completed live broadcast
+ *
+ *  @param success Whether or not broadcast was successful
+ *  @param error   Any error that occurred
+ *  @see presentBroadcasterFromViewController:ready:completion:
+ */
+typedef void (^KFBroadcastCompletionBlock)(BOOL success, NSError* error);
+
+/**
  *  This is the main broadcast user interface that presents a start/stop button
  *  and provides the user with the ability to share a link to the stream
  *  when it has buffered enough segments.

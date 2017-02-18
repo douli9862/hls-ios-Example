@@ -7,86 +7,72 @@
 //
 
 #import "Kickflip.h"
-#import "KFLog.h"
+//#import "KFLog.h"
 //#import "KFBroadcastViewController.h"
+#import "KFRecorder.h"
 
-@interface Kickflip()
+@interface KFRecorderNode()
 //@property (nonatomic, copy) NSString *apiKey;
 //@property (nonatomic, copy) NSString *apiSecret;
 @property (nonatomic) NSUInteger maxBitrate;
 @property (nonatomic) BOOL useAdaptiveBitrate;
 @end
 
-static Kickflip *_kickflip = nil;
-
-@implementation Kickflip
-
-+ (void) presentBroadcasterFromViewController:(UIViewController *)viewController ready:(KFBroadcastReadyBlock)readyBlock completion:(KFBroadcastCompletionBlock)completionBlock {
-//    KFBroadcastViewController *broadcastViewController = [[KFBroadcastViewController alloc] init];
-//    broadcastViewController.readyBlock = readyBlock;
-//    broadcastViewController.completionBlock = completionBlock;
-//    [viewController presentViewController:broadcastViewController animated:YES completion:nil];
+//static Kickflip *_kickflip = nil;
+//
+@implementation KFRecorderNode
+{
+    KFRecorder *_recorderSession;
 }
 
-+ (Kickflip*) sharedInstance {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _kickflip = [[Kickflip alloc] init];
-    });
-    return _kickflip;
+
+- (id) initDelegate:(id<KFRecorderDelegate>)delegate
+{
+    _recorderSession = [[KFRecorder alloc] init];
+    _recorderSession.delegate = delegate;
 }
 
-- (id) init {
-    if (self = [super init]) {
-        _maxBitrate = 2000 * 1000; // 2 Mbps
-        _useAdaptiveBitrate = YES;
-    }
-    return self;
+- (id) initWithBitrateSize:(id<KFRecorderDelegate>)delegate withVideoBirate:(int)videoBirate
+                  withSize:(CGSize)videoSize
+       withAudioSampleRate:(NSUInteger)audioSampleRate
+{
+    _recorderSession = [[KFRecorder alloc] initWithBitrateSize:videoBirate withSize:videoSize withAudioSampleRate:audioSampleRate];
+    _recorderSession.delegate = delegate;
+    
+    
 }
 
-#if 0
-
-+ (void) setupWithAPIKey:(NSString *)key secret:(NSString *)secret {
-    Kickflip *kickflip = [Kickflip sharedInstance];
-    kickflip.apiKey = key;
-    kickflip.apiSecret = secret;
-    KFUser *activeUser = [KFUser activeUser];
-    if (!activeUser) {
-        [[KFAPIClient sharedClient] requestNewActiveUserWithUsername:nil callbackBlock:^(KFUser *newUser, NSError *error) {
-            if (error) {
-                DDLogError(@"Error pre-fetching new user: %@", error);
-                NSLog(@"Error pre-fetching new user: %@", error);
-            } else {
-                //DDLogVerbose
-                NSLog(@"New user fetched pre-emptively: %@", newUser);
-            }
-        }];
+- (void)startSession:(NSString*)hlsPath
+{
+    if(_recorderSession){
+        [_recorderSession startRecording:hlsPath];
     }
 }
 
-+ (NSString*) apiKey {
-    return [Kickflip sharedInstance].apiKey;
+- (void)encodeAudioWithASBD:(AudioStreamBasicDescription)asbd time:(const AudioTimeStamp *)time numberOfFrames:(UInt32)frames buffer:(AudioBufferList *)audio
+{
+    if(_recorderSession){
+        [_recorderSession inputAudioFrame:asbd time:time numberOfFrames:frames buffer:audio];
+    }
 }
 
-+ (NSString*) apiSecret {
-    return [Kickflip sharedInstance].apiSecret;
-}
-#endif
+- (void)encodeVideoWithPixelBuffer:(CVPixelBufferRef)buffer time:(CMTime)time
+{
 
-+ (void) setMaxBitrate:(double)maxBitrate {
-    [Kickflip sharedInstance].maxBitrate = maxBitrate;
 }
 
-+ (double) maxBitrate {
-    return [Kickflip sharedInstance].maxBitrate;
+- (void)encodeVideoWithSample:(CMSampleBufferRef)sample
+{
+    if(_recorderSession){
+        [_recorderSession intputVidoFrame:sample];
+    }
 }
 
-+ (BOOL) useAdaptiveBitrate {
-    return [Kickflip sharedInstance].useAdaptiveBitrate;
+- (void)endSession{
+    if(_recorderSession){
+        [_recorderSession stopRecording];
+    }
 }
 
-+ (void) setUseAdaptiveBitrate:(BOOL)enabled {
-    [Kickflip sharedInstance].useAdaptiveBitrate = enabled;
-}
 
 @end

@@ -10,17 +10,18 @@
 #import <AVFoundation/AVFoundation.h>
 #import "KFAACEncoder.h"
 #import "KFH264Encoder.h"
-//#import "KFHLSUploader.h"
 #import <CoreLocation/CoreLocation.h>
+
+#import "kickflip.h"
 
 @class KFRecorder, KFHLSWriter, KFStream;
 
-@protocol KFRecorderDelegate <NSObject>
-- (void) setFPS:(int)fps;
-- (void) recorderDidStartRecording:(KFRecorder*)recorder error:(NSError*)error;
-- (void) recorderDidFinishRecording:(KFRecorder*)recorder error:(NSError*)error;
-- (void) recorder:(KFRecorder*)recorder streamReadyAtURL:(NSURL*)url;
-@end
+//@protocol KFRecorderDelegate <NSObject>
+//- (void) setFPS:(int)fps;
+//- (void) recorderDidStartRecording:(KFRecorder*)recorder error:(NSError*)error;
+//- (void) recorderDidFinishRecording:(KFRecorder*)recorder error:(NSError*)error;
+//- (void) recorder:(KFRecorder*)recorder streamReadyAtURL:(NSURL*)url;
+//@end
 
 /**
  *  KFRecorder manages the majority of the AV pipeline
@@ -53,26 +54,19 @@
 @property (nonatomic, weak) id<KFRecorderDelegate> delegate;
 
 - (id) init;
-- (id) initWithMaxbitrate:(int)bitrate;
+- (id) initWithBitrateSize:(int)videoBirate
+                     withSize:(CGSize)videoSize
+          withAudioSampleRate:(NSUInteger)audioSampleRate;
 
-- (void) startRecording;
+- (void) startRecording:(NSString*)hlsPath;
 - (void) stopRecording;
 
+-(BOOL)inputAudioFrame:(AudioStreamBasicDescription)asbd time:(const AudioTimeStamp *)time numberOfFrames:(UInt32)frames buffer:(AudioBufferList *)audio;
 
+-(BOOL)intputVidoFrame:(CMSampleBufferRef)videoSample;
 
 
 @end
 
 
-#if 0
-@interface KFRecorderNode : NSObject
-@property (nonatomic, assign) CGSize exportSize;
-@property (nonatomic, strong) NSString *hlsPath;
 
-- (void)startSession;
-- (void)encodeAudioWithASBD:(AudioStreamBasicDescription)asbd time:(const AudioTimeStamp *)time numberOfFrames:(UInt32)frames buffer:(AudioBufferList *)audio;
-- (void)encodeVideoWithPixelBuffer:(CVPixelBufferRef)buffer time:(CMTime)time;
-- (void)endSession;
-
-@end
-#endif

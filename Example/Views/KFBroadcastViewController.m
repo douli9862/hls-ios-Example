@@ -13,12 +13,17 @@
 #import "KFLog.h"
 #import "PureLayout.h"
 
+
+
 @implementation KFBroadcastViewController
 
 - (id) init {
     if (self = [super init]) {
-        //self.recorder = [[KFRecorder alloc] init];
         self.recorder = [[KFRecorder alloc] init];
+        CGSize videoSize;
+        videoSize.width = 1280;
+        videoSize.height = 720;
+        //self.recorder = [[KFRecorder alloc] initWithBitrateSize:2000000 withSize:videoSize withAudioSampleRate:44100];
         self.recorder.delegate = self;
     }
     return self;
@@ -106,7 +111,7 @@
         self.cancelButton.alpha = 0.0f;
     }];
     if (!self.recorder.isRecording) {
-        [self.recorder startRecording];
+        [self.recorder startRecording:@"hls-out"];
     } else {
         [self.recorder stopRecording];
     }
@@ -233,7 +238,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) recorderDidStartRecording:(KFRecorder *)recorder error:(NSError *)error {
+//- (void) recorderDidStartRecording:(KFRecorder *)recorder error:(NSError *)error {
+- (void) recorderDidStartRecording:(NSError *)error {
     self.recordButton.enabled = YES;
     if (error) {
         DDLogError(@"Error starting stream: %@", error.userInfo);
@@ -262,7 +268,8 @@
     }
 }
 
-- (void) recorderDidFinishRecording:(KFRecorder *)recorder error:(NSError *)error {
+//- (void) recorderDidFinishRecording:(KFRecorder *)recorder error:(NSError *)error {
+- (void) recorderDidFinishRecording:(NSError *)error {
     if (_completionBlock) {
         if (error) {
             _completionBlock(NO, error);
