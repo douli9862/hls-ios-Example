@@ -27,7 +27,7 @@
 @property (nonatomic, strong) NSString *hlsPath;
 
 
-- (id) init;
+//- (id) init;
 
 - (id) initDelegate:(id<KFRecorderDelegate>)delegate;
 
@@ -40,10 +40,11 @@
 
 - (void)encodeAudioWithASBDEX:(AudioStreamBasicDescription)asbd buffer:(AudioBufferList *)audio;
 
-//- (void)encodeAudioWithASBD:(AudioStreamBasicDescription)asbd time:(const AudioTimeStamp *)time numberOfFrames:(UInt32)frames buffer:(AudioBufferList *)audio;
 - (void)encodeAudioWithASBD:(AudioStreamBasicDescription)asbd time:(const AudioTimeStamp *)time numberOfFrames:(UInt32)frames buffer:(AudioBufferList *)audio;
 
 - (void)encodeVideoWithPixelBuffer:(CVPixelBufferRef)buffer time:(CMTime)time;
+
+-(BOOL)inputAudioCMSampleBufferref:(CMSampleBufferRef)audio;
 
 - (void)encodeVideoWithSample:(CMSampleBufferRef)sample;
 - (void)endSession;

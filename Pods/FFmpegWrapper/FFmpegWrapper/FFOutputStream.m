@@ -40,7 +40,7 @@
     c->codec_type = AVMEDIA_TYPE_VIDEO;
     c->width    = width;
 	c->height   = height;
-    c->bit_rate = 2000000;
+    c->bit_rate = 20*1000*1000;//2000000;
     c->profile = FF_PROFILE_H264_BASELINE;
     c->time_base.den = 30;
 	c->time_base.num = 1;

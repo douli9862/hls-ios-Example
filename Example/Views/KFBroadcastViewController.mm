@@ -16,7 +16,7 @@
 #import "KFLog.h"
 #import "PureLayout.h"
 
-
+#define __ENABLE__UNIT__
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v) \
 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -207,7 +207,10 @@ bool isRecording = false;
         isRecording = true;
     } else {
         isRecording = false;
+        
+#ifdef __ENABLE__UNIT__
         AudioOutputUnitStop(m_audioUnit);
+#endif
         [self->recorder endSession];
     }
 #endif
@@ -517,12 +520,37 @@ bool isRecording = false;
     if ([_session canAddOutput:_videoOutput]) {
         [_session addOutput:_videoOutput];
         
-        [self setActiveFrameRateImpl:VIDEO_CAPTURE_IOS_DEFAULT_INITIAL_FRAMERATE andLocnfig:(BOOL)FALSE andINPUT:videoInput];//add by tzx
+       // [self setActiveFrameRateImpl:VIDEO_CAPTURE_IOS_DEFAULT_INITIAL_FRAMERATE andLocnfig:(BOOL)FALSE andINPUT:videoInput];//add by tzx
     }
     _videoConnection = [_videoOutput connectionWithMediaType:AVMediaTypeVideo];
 }
 
 #pragma mark AVCaptureOutputDelegate method
+
+#ifdef __ENABLE__UNIT__
+- (void) captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
+{
+    if (!isRecording) {
+        return;
+    }
+    CMTime pts = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
+    
+    
+    CVPixelBufferRef pixelBufferref = CMSampleBufferGetImageBuffer(sampleBuffer);
+    
+    // pass frame to encoders
+    if (connection == _videoConnection) {
+        [self->recorder encodeVideoWithPixelBuffer:pixelBufferref time:pts];
+        
+    } else if (connection == _audioConnection) {
+        // [_aacEncoder encodeSampleBuffer:sampleBuf];
+        [self->recorder inputAudioCMSampleBufferref:sampleBuffer];
+    }
+    //CFRelease(sampleBuf);
+}
+#else
+
+
 - (void) captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
     if (!isRecording) {
@@ -539,30 +567,22 @@ bool isRecording = false;
     
     // pass frame to encoders
     if (connection == _videoConnection) {
-//        if (!_hasScreenshot) {
-//            UIImage *image = [self imageFromSampleBuffer:sampleBuffer];
-//            NSString *path = [self.hlsWriter.directoryPath stringByAppendingPathComponent:@"thumb.jpg"];
-//            NSData *imageData = UIImageJPEGRepresentation(image, 0.7);
-//            [imageData writeToFile:path atomically:NO];
-//            _hasScreenshot = YES;
-//        }
-//        
+
         
-        //[_h264Encoder encodeSampleBuffer:sampleBuf];
+        //CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
         
-        CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+        [self->recorder encodeVideoWithSample:sampleBuffer];
         
-        //[self->recorder encodeVideoWithSample:sampleBuf];
-        
-        [self->recorder encodeVideoWithPixelBuffer:imageBuffer time:pts];
-        
-//        [self->recorder encodeAudioWithASBD:<#(AudioStreamBasicDescription)#> time:<#(const AudioTimeStamp *)#> numberOfFrames:<#(UInt32)#> buffer:<#(AudioBufferList *)#>];
+        //[self->recorder encodeVideoWithPixelBuffer:imageBuffer time:pts];
         
     } else if (connection == _audioConnection) {
        // [_aacEncoder encodeSampleBuffer:sampleBuf];
+        [self->recorder inputAudioCMSampleBufferref:sampleBuffer];
     }
     //CFRelease(sampleBuf);
 }
+
+#endif
 
 // Create a UIImage from sample buffer data
 - (UIImage *) imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer
@@ -608,13 +628,20 @@ bool isRecording = false;
 - (void) setupSession {
     _session = [[AVCaptureSession alloc] init];
     [self setupVideoCapture];
-    //[self setupAudioCapture];
+    
+#ifdef __ENABLE__UNIT__
+    [self setupAudioCapture];
+#else
     
     [self setupAudio];
+#endif
     
     // start capture and a preview layer
     [_session startRunning];
+    
+#ifdef __ENABLE__UNIT__
     AudioOutputUnitStart(m_audioUnit);
+#endif
     
     
     _previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];

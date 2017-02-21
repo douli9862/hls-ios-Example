@@ -29,6 +29,9 @@
 {
     bool    bKeyComed;
     int64_t beginTimeVale;
+    
+    FILE    *fp;
+    
 }
 
 - (id) initWithDirectoryPath:(NSString *)directoryPath {
@@ -53,10 +56,13 @@
         _videoTimeBase.den = 1000000000;//1000000;//
         _audioTimeBase.num = 1;
         _audioTimeBase.den = 1000000000;//1000000;//
-        _segmentDurationSeconds = 2;
+        _segmentDurationSeconds = 10;
         [self setupOutputFile];
         _conversionQueue = dispatch_queue_create("HLS Write queue", DISPATCH_QUEUE_SERIAL);
         _uuid = [[NSUUID UUID] UUIDString];
+        
+        NSString *outputPath = [_directoryPath stringByAppendingPathComponent:@"index.h264"];
+        fp = fopen(outputPath.fileSystemRepresentation, "wb+");
     }
     return self;
 }
@@ -127,8 +133,6 @@
 //            return ;
 //        }
         
-        //int64_t originalPTS = pts.value - beginTimeVale;
-        
         originalPTS *= 1000;
         
         _packet->data = (uint8_t*)data.bytes;
@@ -137,6 +141,8 @@
         AVRational temp ;
         if(streamIndex == 0){
             temp = _outputFile.formatContext->streams[_packet->stream_index]->time_base;
+            NSLog(@"video data.length:%d\n", data.length);
+            fwrite(data.bytes, 1, data.length, fp);
         }
         else{
             temp = _outputFile.formatContext->streams[_packet->stream_index]->time_base;

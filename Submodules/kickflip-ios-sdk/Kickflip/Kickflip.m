@@ -83,6 +83,13 @@
     }
 }
 
+-(BOOL)inputAudioCMSampleBufferref:(CMSampleBufferRef)audio
+{
+    if(_recorderSession){
+        [_recorderSession inputAudioCMSampleBufferref:audio];
+    }
+}
+
 - (void)encodeVideoWithSample:(CMSampleBufferRef)sample
 {
     if(_recorderSession){

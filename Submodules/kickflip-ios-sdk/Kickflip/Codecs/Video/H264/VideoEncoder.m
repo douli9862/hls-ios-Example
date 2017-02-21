@@ -8,6 +8,11 @@
 
 #import "VideoEncoder.h"
 
+
+//#if VERSION_OK==1
+#include <VideoToolbox/VideoToolbox.h>
+//#endif
+
 @implementation VideoEncoder
 {
     void*                  m_pixelBuffers;
@@ -21,6 +26,66 @@
     [enc initPath:path Height:height andWidth:width bitrate:bitrate];
     return enc;
 }
+
+
+-(void)setH264Pro
+{
+    
+    
+    
+    
+    
+
+}
+
+#if 1
+- (void) initPath:(NSString*)path Height:(int) height andWidth:(int) width bitrate:(int)bitrate
+{
+    self.path = path;
+    _bitrate = bitrate;
+    
+    [[NSFileManager defaultManager] removeItemAtPath:self.path error:nil];
+    NSURL* url = [NSURL fileURLWithPath:self.path];
+    
+//    NSDictionary *videoCompressionProps = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                           
+//                                           [NSNumber numberWithDouble:1700000],AVVideoAverageBitRateKey,
+//                                           
+//                                           nil ];
+    
+//    NSDictionary *videoSettings = @{AVVideoCodecKey: AVVideoCodecH264,
+//                                    AVVideoCompressionPropertiesKey: @{AVVideoAverageBitRateKey: @(self.bitrate),
+//                                                                       AVVideoMaxKeyFrameIntervalKey: @(50),
+//                                                                       AVVideoProfileLevelKey: AVVideoProfileLevelH264Baseline31,
+//                                                                       (__bridge NSString *)kVTCompressionPropertyKey_PixelTransferProperties: @{
+//                                                                               (__bridge NSString *)kVTPixelTransferPropertyKey_ScalingMode: (__bridge NSString *)kVTScalingMode_Letterbox
+//                                                                               }
+//                                                                       },
+//                                    AVVideoWidthKey: @(width),
+//                                    AVVideoHeightKey: @(height)
+//                                    };
+    
+    
+    _writer = [AVAssetWriter assetWriterWithURL:url fileType:AVFileTypeQuickTimeMovie error:nil];
+    NSDictionary* settings = @{
+                               AVVideoCodecKey: AVVideoCodecH264,
+                               AVVideoWidthKey: @(width),
+                               AVVideoHeightKey: @(height),
+                               AVVideoCompressionPropertiesKey: @{
+                                       AVVideoAverageBitRateKey: @(20*1000*1000),//@(self.bitrate),
+                                       AVVideoMaxKeyFrameIntervalKey: @(60),//@(150),
+                                       AVVideoProfileLevelKey: AVVideoProfileLevelH264Baseline41,//AVVideoProfileLevelH264Baseline31,//AVVideoProfileLevelH264BaselineAutoLevel,
+                                       AVVideoAllowFrameReorderingKey: @NO,
+                                       //AVVideoH264EntropyModeKey: AVVideoH264EntropyModeCAVLC,
+                                       //AVVideoExpectedSourceFrameRateKey: @(30),
+                                       //AVVideoAverageNonDroppableFrameRateKey: @(30)
+                                       }
+                               };
+    _writerInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:settings];
+    _writerInput.expectsMediaDataInRealTime = YES;
+    [_writer addInput:_writerInput];
+}
+#else
 
 
 - (void) initPath:(NSString*)path Height:(int) height andWidth:(int) width bitrate:(int)bitrate
@@ -37,19 +102,23 @@
         AVVideoWidthKey: @(width),
         AVVideoHeightKey: @(height),
         AVVideoCompressionPropertiesKey: @{
-             AVVideoAverageBitRateKey: @(self.bitrate),
-             AVVideoMaxKeyFrameIntervalKey: @(50),//@(150),
-             AVVideoProfileLevelKey: AVVideoProfileLevelH264Baseline31,//AVVideoProfileLevelH264BaselineAutoLevel,
+                AVVideoAverageBitRateKey: @(self.bitrate),//@(100000),//@(20*1000*1000),//,
+             AVVideoMaxKeyFrameIntervalKey: @(60),//@(150),//
+             AVVideoProfileLevelKey: AVVideoProfileLevelH264BaselineAutoLevel,//AVVideoProfileLevelH264Baseline41,//AVVideoProfileLevelH264Baseline31,//
+            
              AVVideoAllowFrameReorderingKey: @NO,
              //AVVideoH264EntropyModeKey: AVVideoH264EntropyModeCAVLC,
              //AVVideoExpectedSourceFrameRateKey: @(30),
              //AVVideoAverageNonDroppableFrameRateKey: @(30)
+               
+
         }
     };
     _writerInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:settings];
     _writerInput.expectsMediaDataInRealTime = YES;
     [_writer addInput:_writerInput];
 }
+#endif
 
 - (void) finishWithCompletionHandler:(void (^)(void))handler
 {

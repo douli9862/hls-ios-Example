@@ -90,7 +90,8 @@ static int64_t GetNowUs() {
 #ifdef __ENABLE_SDK_CAPTURE_AUIDO_VIDEO__
         [self setupSession];
 #endif
-        [self setupEncoders:videoBirate withSize:videoSize withAudioSampleRate:audioSampleRate];
+        //[self setupEncoders:videoBirate withSize:videoSize withAudioSampleRate:audioSampleRate];
+        [self setupEncoders];
         
         bool bRet = ::createAudioPool(&mAudioPool, 2048, 5);
         if(!bRet){
@@ -137,6 +138,24 @@ static int64_t GetNowUs() {
 }
 
 
+-(BOOL)inputAudioCMSampleBufferref:(CMSampleBufferRef)audio
+{
+    if (!_isRecording) {
+        return false;
+    }
+
+    
+    if (audio) {
+        //[self inputCallback:audioSample];
+        [_aacEncoder encodeSampleBuffer:audio];
+    }
+    
+    return true;
+    
+}
+
+
+
 -(BOOL)inputAudioFrame:(AudioStreamBasicDescription)asbd time:(const AudioTimeStamp *)time numberOfFrames:(UInt32)frames buffer:(AudioBufferList *)audio
 {
     if (!_isRecording) {
@@ -159,7 +178,9 @@ static int64_t GetNowUs() {
     CMSampleBufferRef audioSample = [self AudioBufferListToCSamplebuffer:audio withASBD:asbd];
     
     if (audioSample) {
-        [self inputCallback:audioSample];
+       //[self inputCallback:audioSample];
+        [_aacEncoder encodeSampleBuffer:audioSample];
+
         CFRelease(audioSample);
     }
 
@@ -265,7 +286,7 @@ static int64_t GetNowUs() {
 -(CMSampleBufferRef)PixelBufferRefToCSamplebuffer:(CVPixelBufferRef) pixelBufferRef
 {
     OSStatus result = 0;
-    CVPixelBufferLockBaseAddress(pixelBufferRef,kCVPixelBufferLock_ReadOnly);
+    //CVPixelBufferLockBaseAddress(pixelBufferRef,kCVPixelBufferLock_ReadOnly);
     CMSampleBufferRef newSampleBuffer = NULL;
     CMTime pts = CMTimeMake(GetNowUs(), 1000000000);
     CMSampleTimingInfo timimgInfo = { CMTimeMake(1, 25), pts, pts };
@@ -277,11 +298,57 @@ static int64_t GetNowUs() {
         return nil;
     }
     
+//    result = CMSampleBufferCreateReadyWithImageBuffer(kCFAllocatorDefault, (CVImageBufferRef)pixelBufferRef, videoInfo, &timimgInfo, &newSampleBuffer);
+    
     result = CMSampleBufferCreateForImageBuffer(kCFAllocatorDefault, pixelBufferRef, true, NULL, NULL, videoInfo, &timimgInfo, &newSampleBuffer);
     if(result != 0){
        return nil;
     }
-    CVPixelBufferUnlockBaseAddress(pixelBufferRef,kCVPixelBufferLock_ReadOnly);
+    //CVPixelBufferUnlockBaseAddress(pixelBufferRef,kCVPixelBufferLock_ReadOnly);
+    
+    return newSampleBuffer;
+}
+
+
+-(CMSampleBufferRef)PixelBufferRefToCSamplebufferEX:(CVPixelBufferRef) pixelBufferRef
+{
+    CVPixelBufferLockBaseAddress(pixelBufferRef,0);
+    
+    uint8_t *buf=(uint8_t *)CVPixelBufferGetBaseAddress(pixelBufferRef);
+    
+    
+    
+    
+    int width = CVPixelBufferGetWidth(pixelBufferRef);
+    int height = CVPixelBufferGetHeight(pixelBufferRef);
+    int bitmapBytesPerRow   = width*4;
+    int bitmapByteCount     = bitmapBytesPerRow*height;
+    
+    
+    CVPixelBufferRef pixelBufRef = NULL;
+    CMSampleBufferRef newSampleBuffer = NULL;
+    
+    //CMSampleBufferGetSampleTimingInfo(sampleBuffer, 0, &timimgInfo);
+    
+    CMTime pts = CMTimeMake(GetNowUs(), 1000000000);
+    CMSampleTimingInfo timimgInfo = { CMTimeMake(1, 25), pts, pts };
+    
+    OSStatus result = 0;
+    
+    OSType pixFmt = CVPixelBufferGetPixelFormatType(pixelBufferRef);
+    
+    CVPixelBufferCreateWithBytes(kCFAllocatorDefault, width, height, pixFmt, buf, bitmapBytesPerRow, NULL, NULL, NULL, &pixelBufRef);
+    
+    CMVideoFormatDescriptionRef videoInfo = NULL;
+    
+    result = CMVideoFormatDescriptionCreateForImageBuffer(NULL, pixelBufRef, &videoInfo);
+    
+    result = CMSampleBufferCreateForImageBuffer(kCFAllocatorDefault, pixelBufRef, true, NULL, NULL, videoInfo, &timimgInfo, &newSampleBuffer);
+    
+    if(result != 0){
+        return nil;
+    }
+    CVPixelBufferUnlockBaseAddress(pixelBufferRef,0);
     
     return newSampleBuffer;
 }

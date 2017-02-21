@@ -67,6 +67,8 @@
 
 -(BOOL)intputPixelBufferRef:(CVPixelBufferRef)pixelbufferRef;
 
+-(BOOL)inputAudioCMSampleBufferref:(CMSampleBufferRef)audio;
+
 
 @end
 
